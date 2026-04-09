@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import {motion} from "framer-motion";
 import {useAnimations} from "../Hooks/useAnimations";
+import Image from "next/image";
 
 const ServiceCardStyle = styled(motion.div)`
 width: 45%;
@@ -47,11 +48,12 @@ export const ServiceCard = (props: Prop)=>{
         variants={titleAnimation}
         className="services-cards-card">
                         <div className="card-icon">
-                            <img src={props.iconURL} alt=""/>
+                            <div className="relative h-14 w-14">
+                                <Image src={props.iconURL} alt="" fill className="object-contain" />
+                            </div>
                         </div>
                         <div className="card-title">{props.title}</div>
                         <p className="card-text">{props.text}</p>
         </ServiceCardStyle>
     )
 }
-

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
@@ -69,12 +70,15 @@ export default function PageArticle() {
       <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
       
       {post.imageUrl && (
-        <img
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full h-auto rounded-lg mb-6"
-          loading="lazy"
-        />
+        <div className="relative mb-6 h-[420px] w-full overflow-hidden rounded-lg">
+          <Image
+            src={post.imageUrl}
+            alt={post.title}
+            fill
+            unoptimized
+            className="object-cover"
+          />
+        </div>
       )}
       
       {post.videoUrl && (

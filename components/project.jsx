@@ -1,5 +1,6 @@
 import React from "react";
 import style from "../styles/projects.module.css";
+import Image from "next/image";
 
 import { motion } from "framer-motion";
 const ImageAnimate = {
@@ -97,7 +98,9 @@ const Project = ({
             className={`${style.deskImgDiv}`}
           >
             {/* <div className={`${style.deskImgDiv}`}> */}
-            <img src={img1} alt="" />
+            <div className="relative h-full w-full">
+              <Image src={img1} alt="" fill className="object-contain" />
+            </div>
             {/* </div> */}
           </motion.div>
 
@@ -111,7 +114,9 @@ const Project = ({
             className={`${style.phoneImgDiv}`}
           >
             {/* <div className={`${style.phoneImgDiv}`}> */}
-            <img src={img2} alt="" />
+            <div className="relative h-full w-full">
+              <Image src={img2} alt="" fill className="object-contain" />
+            </div>
             {/* </div> */}
           </motion.div>
         </div>

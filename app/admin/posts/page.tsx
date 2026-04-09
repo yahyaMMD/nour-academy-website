@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { FiImage, FiVideo, FiEdit2, FiPlus, FiSearch } from 'react-icons/fi';
@@ -121,11 +122,12 @@ function AdminPostsList() {
                     {/* Media Thumbnail */}
                     <div className="w-full md:w-48 h-32 bg-gray-100 rounded-lg overflow-hidden shrink-0">
                       {post.imageUrl ? (
-                        <img
+                        <Image
                           src={post.imageUrl}
                           alt={post.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
+                          fill
+                          unoptimized
+                          className="object-cover"
                         />
                       ) : post.videoUrl ? (
                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-dentalPurple to-purple-600">

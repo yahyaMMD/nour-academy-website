@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -178,11 +179,15 @@ export default function AdminCoursesPage() {
                     <TableCell className="font-medium">
                       <div className="flex items-center gap-3">
                         {course.image && (
-                          <img
-                            src={course.image}
-                            alt={course.title}
-                            className="h-10 w-10 rounded-md object-cover"
-                          />
+                          <div className="relative h-10 w-10 overflow-hidden rounded-md">
+                            <Image
+                              src={course.image}
+                              alt={course.title}
+                              fill
+                              unoptimized
+                              className="object-cover"
+                            />
+                          </div>
                         )}
                         <span>{course.title}</span>
                       </div>

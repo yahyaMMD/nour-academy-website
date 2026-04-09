@@ -47,7 +47,7 @@ const RecentProjects = () => {
 
                 <div className="flex items-center justify-between mt-7 mb-3">
                   <div className="flex items-center">
-                    {item.iconLists.map((icon, index) => (
+                  {item.iconLists.map((icon, index) => (
                       <div
                         key={index}
                         className="border border-gray-100 rounded-full lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
@@ -55,7 +55,9 @@ const RecentProjects = () => {
                           transform: `translateX(-${5 * index + 2}px)`,
                         }}
                       >
-                        <img src={icon} alt="icon5" className="p-2" />
+                        <div className="relative h-full w-full">
+                          <Image src={icon} alt="" fill className="p-2 object-contain" />
+                        </div>
                       </div>
                     ))}
                   </div>

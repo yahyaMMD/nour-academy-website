@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -130,19 +131,20 @@ function ListeArticles() {
 
         {/* Grille d'articles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <article 
-              key={post.id || `post-${Math.random().toString(36).substr(2, 9)}`} 
+              key={post.id || `post-${index}`} 
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group"
             >
               {/* Aperçu média */}
               <div className="relative h-48 bg-gray-100">
                 {post.imageUrl ? (
-                  <img
+                  <Image
                     src={post.imageUrl}
                     alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
+                    fill
+                    unoptimized
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : post.videoUrl ? (
                   <div className="w-full h-full flex items-center justify-center bg-gray-300">

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import BrandLogo from '@/components/BrandLogo';
 
 export default function LoginPage() {
   const [data, setData] = useState({ email: '', password: '' });

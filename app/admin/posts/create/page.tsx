@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiImage, FiVideo, FiX } from 'react-icons/fi';
@@ -36,7 +37,7 @@ export default function PageCreationArticle() {
         router.push(`/posts/${data.id}`);
       }
     } catch (error) {
-      console.error('Erreur lors de la création de l\'article :', error);
+      console.error("Erreur lors de la création de l'article :", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -67,7 +68,6 @@ export default function PageCreationArticle() {
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <form onSubmit={handleSubmit} className="p-6 sm:p-10">
-            {/* Champ Titre */}
             <div className="mb-8">
               <label htmlFor="title" className="block text-lg font-medium text-gray-700 mb-3">
                 Titre de l&#39;article
@@ -83,7 +83,6 @@ export default function PageCreationArticle() {
               />
             </div>
 
-            {/* Champ Description */}
             <div className="mb-8">
               <label htmlFor="description" className="block text-lg font-medium text-gray-700 mb-3">
                 Votre contenu
@@ -99,12 +98,11 @@ export default function PageCreationArticle() {
               />
             </div>
 
-            {/* Sélection du type de média */}
             <div className="mb-8">
               <label className="block text-lg font-medium text-gray-700 mb-3">
                 Ajouter un média (Optionnel)
               </label>
-              
+
               <div className="flex space-x-4 mb-6">
                 <button
                   type="button"
@@ -124,7 +122,6 @@ export default function PageCreationArticle() {
                 </button>
               </div>
 
-              {/* Champ URL média */}
               {mediaType && (
                 <div className="relative">
                   <div className="flex items-center">
@@ -136,7 +133,7 @@ export default function PageCreationArticle() {
                       value={mediaUrl}
                       onChange={(e) => handleMediaChange(e.target.value)}
                       className="w-full pl-12 pr-10 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-dentalPurple focus:border-transparent"
-                      placeholder={`Coller l'URL ${mediaType === 'image' ? 'de l\'image' : 'de la vidéo'} ici...`}
+                      placeholder={`Coller l'URL ${mediaType === 'image' ? "de l'image" : 'de la vidéo'} ici...`}
                     />
                     {mediaUrl && (
                       <button
@@ -151,16 +148,19 @@ export default function PageCreationArticle() {
                 </div>
               )}
 
-              {/* Aperçu du média */}
               {previewUrl && (
                 <div className="mt-6 rounded-xl overflow-hidden border border-gray-200">
                   {mediaType === 'image' ? (
-                    <img
-                      src={previewUrl}
-                      alt="Aperçu"
-                      className="w-full h-auto max-h-96 object-contain"
-                      onError={() => setPreviewUrl('')}
-                    />
+                    <div className="relative h-96 w-full">
+                      <Image
+                        src={previewUrl}
+                        alt="Aperçu"
+                        fill
+                        unoptimized
+                        className="object-contain"
+                        onError={() => setPreviewUrl('')}
+                      />
+                    </div>
                   ) : (
                     <div className="aspect-w-16 aspect-h-9">
                       <iframe
@@ -175,7 +175,6 @@ export default function PageCreationArticle() {
               )}
             </div>
 
-            {/* Bouton de soumission */}
             <div className="mt-10">
               <button
                 type="submit"
@@ -191,7 +190,7 @@ export default function PageCreationArticle() {
                     Publication en cours...
                   </span>
                 ) : (
-                  'Publier l\'article'
+                  "Publier l'article"
                 )}
               </button>
             </div>

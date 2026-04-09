@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import BrandLogo from '@/components/BrandLogo';
 
 export default function RegisterPage() {
   const router = useRouter();

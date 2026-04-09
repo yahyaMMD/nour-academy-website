@@ -1,6 +1,7 @@
 import React from "react";
 import style from "../styles/skills.module.css";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const Skill = ({ img, name }) => {
   const cardAnimate = {
@@ -33,7 +34,9 @@ const Skill = ({ img, name }) => {
           whileInView={"onscreen"}
           variants={imgAnimate}
         >
-          <img className={`skills-card-img ${style.img}`} src={img} alt="" />
+          <div className={`relative ${style.img}`}>
+            <Image className="object-contain" src={img} alt="" fill />
+          </div>
         </motion.div>
         <h3 className={`skills-card-name ${style.name}`}>{name}</h3>
       </div>

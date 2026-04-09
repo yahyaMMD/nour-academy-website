@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -283,17 +284,15 @@ export default function CourseForm() {
               {imagePreview ? (
                 <div className="relative group">
                   <div className="max-w-full overflow-hidden rounded-xl border border-gray-200">
-                    <img 
-                      src={imagePreview} 
-                      alt="Course preview" 
-                      className="w-auto h-auto max-w-full max-h-[500px] object-contain"
-                      onLoad={(e) => {
-                        console.log('Original dimensions:', {
-                          width: e.currentTarget.naturalWidth,
-                          height: e.currentTarget.naturalHeight
-                        });
-                      }}
-                    />
+                    <div className="relative h-[500px] w-full">
+                      <Image
+                        src={imagePreview}
+                        alt="Course preview"
+                        fill
+                        unoptimized
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                   <button
                     type="button"
