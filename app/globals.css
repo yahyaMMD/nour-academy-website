@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #2d83ad;
+  --brand-primary-soft: #e6f4fa;
+  --brand-accent: #ff4343;
+  --brand-accent-soft: #ffe0dc;
+  --brand-highlight: #ffd740;
+  --brand-highlight-soft: #fff4bf;
+  --brand-ink: #16384b;
+  --brand-muted: #5a6c78;
+  --brand-surface: #fffdf8;
+  --font-brand-heading: "SC Sharjah", "Noto Kufi Arabic", "Tajawal", sans-serif;
+  --font-brand-body: "Al-Jazeera Arabic", "Tajawal", sans-serif;
+  --font-brand-display: "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-brand-body);
+  color: var(--brand-ink);
+  background:
+    radial-gradient(circle at top left, rgba(45, 131, 173, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 215, 64, 0.18), transparent 26%),
+    linear-gradient(180deg, #fffefb 0%, #f5fbfd 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-brand-heading);
+}
+
+::selection {
+  background: rgba(255, 67, 67, 0.2);
+  color: var(--brand-ink);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-display {
+  font-family: var(--font-brand-display);
+}
+
+.brand-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(45, 131, 173, 0.12);
+  box-shadow: 0 20px 60px rgba(22, 56, 75, 0.08);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

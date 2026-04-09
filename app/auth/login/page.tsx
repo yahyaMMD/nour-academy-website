@@ -1,0 +1,90 @@
+'use client'
+
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import BrandLogo from '@/components/BrandLogo';
+
+export default function LoginPage() {
+  const [data, setData] = useState({ email: '', password: '' });
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  const loginUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result?.error) {
+      setError('تعذر تسجيل الدخول. تحقق من البريد الإلكتروني وكلمة المرور.');
+      return;
+    }
+
+    router.push('/');
+    router.refresh();
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center px-4 py-14" dir="rtl">
+      <div className="brand-panel w-full max-w-md rounded-[2rem] p-8">
+        <h1 className="mb-2 text-center font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)]">
+          تسجيل الدخول
+        </h1>
+        <p className="mb-6 text-center text-sm leading-7 text-[var(--brand-muted)]">
+          استخدم حساب الإدارة أو حساب الطالب للدخول إلى المنصة.
+        </p>
+
+        <form className="space-y-5" onSubmit={loginUser}>
+          <div>
+            <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[var(--brand-ink)]">
+              البريد الإلكتروني
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+              required
+              className="block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-[var(--brand-ink)] outline-none transition focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary-soft)]"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="mb-2 block text-sm font-semibold text-[var(--brand-ink)]">
+              كلمة المرور
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
+              required
+              className="block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-[var(--brand-ink)] outline-none transition focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary-soft)]"
+            />
+          </div>
+
+          {error && <p className="text-sm font-medium text-[var(--brand-accent)]">{error}</p>}
+
+          <button
+            type="submit"
+            className="w-full rounded-2xl bg-[var(--brand-primary)] px-4 py-3 font-bold text-white transition hover:bg-[#236d90]"
+          >
+            دخول
+          </button>
+        </form>
+
+        <button
+          onClick={() => router.push('/auth/register')}
+          className="mt-4 w-full rounded-2xl border border-[var(--brand-primary)] px-4 py-3 font-bold text-[var(--brand-primary)] transition hover:bg-[var(--brand-primary-soft)]"
+        >
+          إنشاء حساب جديد
+        </button>
+      </div>
+    </div>
+  );
+}
