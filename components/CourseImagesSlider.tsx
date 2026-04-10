@@ -12,7 +12,7 @@ type GalleryImage = {
   alt?: string | null;
 };
 
-export default function ImageGallery() {
+export default function ImageGallery({ courseId }: { courseId: string }) {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,7 +21,7 @@ export default function ImageGallery() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch('/api/images?activeOnly=true');
+        const response = await fetch(`/api/images?activeOnly=true&courseId=${encodeURIComponent(courseId)}`);
         const data = await response.json();
         if (data.success) {
           setImages(data.data);
@@ -34,7 +34,7 @@ export default function ImageGallery() {
     };
 
     fetchImages();
-  }, []);
+  }, [courseId]);
 
   const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % images.length);
   const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);

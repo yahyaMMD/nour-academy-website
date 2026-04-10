@@ -10,22 +10,34 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { NAV_LINKS } from "@/utils";
 import BrandLogo from "@/components/BrandLogo";
 
-const MobileNavbar = () => {
+type MobileNavbarProps = {
+  onMenuStateChange?: (open: boolean) => void;
+};
+
+const MobileNavbar = ({ onMenuStateChange }: MobileNavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
 
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    onMenuStateChange?.(open);
+  };
+
   return (
     <div className="flex items-center justify-end lg:hidden">
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <Sheet open={isOpen} onOpenChange={handleOpenChange}>
         <SheetTrigger asChild>
-          <Button size="icon" variant="ghost" className="rounded-full">
+          <Button
+            size="icon"
+            variant="ghost"
+            className={`rounded-full transition-opacity ${isOpen ? "pointer-events-none opacity-0" : "opacity-100"}`}
+          >
             <Menu className="h-6 w-6 text-[var(--brand-ink)]" />
           </Button>
         </SheetTrigger>
 
         <SheetContent className="w-screen border-l-0 bg-[var(--brand-surface)]">
-          <div className="mt-8">
-            <BrandLogo className="mb-8" />
+          <div className="my-20">
 
             <Accordion type="single" collapsible className="w-full">
               {NAV_LINKS.map((link) => (

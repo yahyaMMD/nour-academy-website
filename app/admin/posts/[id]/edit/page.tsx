@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
@@ -19,7 +19,6 @@ export default function EditPostPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  // Fetch post data
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -34,7 +33,7 @@ export default function EditPostPage() {
           });
         }
       } catch (error) {
-        console.error('Error fetching post:', error);
+        console.error('خطأ أثناء جلب المقال:', error);
       } finally {
         setIsLoading(false);
       }
@@ -60,7 +59,7 @@ export default function EditPostPage() {
         router.push('/admin/posts');
       }
     } catch (error) {
-      console.error('Error updating post:', error);
+      console.error('خطأ أثناء تحديث المقال:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -77,7 +76,7 @@ export default function EditPostPage() {
         router.push('/admin/posts');
       }
     } catch (error) {
-      console.error('Error deleting post:', error);
+      console.error('خطأ أثناء حذف المقال:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -85,79 +84,76 @@ export default function EditPostPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-dentalPurple"></div>
+      <div className="min-h-screen bg-[var(--brand-surface)] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--brand-primary)]"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[var(--brand-surface)] py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
       <div className="max-w-3xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Edit Post</h1>
-          <button
-            onClick={() => router.push('/admin/posts')}
-            className="flex items-center text-gray-500 hover:text-gray-700"
-          >
-            <FiX className="mr-1" /> Cancel
+          <h1 className="text-3xl font-bold text-[var(--brand-ink)]">تعديل المقال</h1>
+          <button onClick={() => router.push('/admin/posts')} className="flex items-center text-gray-500 hover:text-[var(--brand-ink)]">
+            <FiX className="ml-1" /> إلغاء
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white shadow rounded-lg p-6">
           <div className="space-y-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-                Title
+              <label htmlFor="title" className="block text-sm font-medium text-[var(--brand-ink)] mb-1">
+                العنوان
               </label>
               <input
                 type="text"
                 id="title"
                 value={post.title}
                 onChange={(e) => setPost({ ...post, title: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-dentalPurple focus:border-dentalPurple"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-                Description
+              <label htmlFor="description" className="block text-sm font-medium text-[var(--brand-ink)] mb-1">
+                الوصف
               </label>
               <textarea
                 id="description"
                 value={post.description}
                 onChange={(e) => setPost({ ...post, description: e.target.value })}
                 rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-dentalPurple focus:border-dentalPurple"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-                Image URL (optional)
+              <label htmlFor="imageUrl" className="block text-sm font-medium text-[var(--brand-ink)] mb-1">
+                رابط الصورة (اختياري)
               </label>
               <input
                 type="url"
                 id="imageUrl"
                 value={post.imageUrl}
                 onChange={(e) => setPost({ ...post, imageUrl: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-dentalPurple focus:border-dentalPurple"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
 
             <div>
-              <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-700 mb-1">
-                Video URL (optional)
+              <label htmlFor="videoUrl" className="block text-sm font-medium text-[var(--brand-ink)] mb-1">
+                رابط الفيديو (اختياري)
               </label>
               <input
                 type="url"
                 id="videoUrl"
                 value={post.videoUrl}
                 onChange={(e) => setPost({ ...post, videoUrl: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-dentalPurple focus:border-dentalPurple"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
                 placeholder="https://youtube.com/embed/video-id"
               />
             </div>
@@ -169,43 +165,33 @@ export default function EditPostPage() {
                 disabled={isSubmitting}
                 className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
               >
-                <FiTrash2 className="mr-2" />
-                Delete Post
+                <FiTrash2 className="ml-2" />
+                حذف المقال
               </button>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex items-center px-4 py-2 bg-dentalPurple text-white rounded-md  focus:outline-none focus:ring-2 focus:ring-dentalPurple disabled:opacity-50"
+                className="flex items-center px-4 py-2 bg-[var(--brand-primary)] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] disabled:opacity-50"
               >
-                <FiSave className="mr-2" />
-                {isSubmitting ? 'Saving...' : 'Save Changes'}
+                <FiSave className="ml-2" />
+                {isSubmitting ? 'جارٍ الحفظ...' : 'حفظ التغييرات'}
               </button>
             </div>
           </div>
         </form>
 
-        {/* Delete Confirmation Modal */}
         {showDeleteConfirm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Confirm Deletion</h3>
-              <p className="text-gray-600 mb-6">
-                Are you sure you want to delete this post? This action cannot be undone.
-              </p>
+              <h3 className="text-lg font-medium text-[var(--brand-ink)] mb-4">تأكيد الحذف</h3>
+              <p className="text-[var(--brand-muted)] mb-6">هل أنت متأكد من حذف هذا المقال؟ لا يمكن التراجع عن هذا الإجراء.</p>
               <div className="flex justify-end gap-3">
-                <button
-                  onClick={() => setShowDeleteConfirm(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-                >
-                  Cancel
+                <button onClick={() => setShowDeleteConfirm(false)} className="px-4 py-2 border border-gray-300 rounded-md text-[var(--brand-ink)] hover:bg-[var(--brand-surface)]">
+                  إلغاء
                 </button>
-                <button
-                  onClick={handleDelete}
-                  disabled={isSubmitting}
-                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
-                >
-                  {isSubmitting ? 'Deleting...' : 'Delete'}
+                <button onClick={handleDelete} disabled={isSubmitting} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50">
+                  {isSubmitting ? 'جارٍ الحذف...' : 'حذف'}
                 </button>
               </div>
             </div>

@@ -54,12 +54,12 @@ async function main() {
   await prisma.user.upsert({
     where: { email: "admin@nouracademy.com" },
     update: {
-      name: "Nour Academy Admin",
+      name: "Nour Platform Admin",
       hashePassword: adminPassword,
       role: "Admin",
     },
     create: {
-      name: "Nour Academy Admin",
+      name: "Nour Platform Admin",
       email: "admin@nouracademy.com",
       hashePassword: adminPassword,
       role: "Admin",
@@ -68,17 +68,17 @@ async function main() {
 
   const mathCategory = await upsertCategory(
     "الرياضيات",
-    "فئة تجريبية لاختبار مسارات الرياضيات داخل مدرسة النور."
+    "فئة تجريبية لاختبار مسارات الرياضيات داخل منصة النور."
   );
   const physicsCategory = await upsertCategory(
     "الفيزياء",
-    "فئة تجريبية لاختبار مسارات الفيزياء داخل مدرسة النور."
+    "فئة تجريبية لاختبار مسارات الفيزياء داخل منصة النور."
   );
 
   await upsertCourse({
     title: "أساسيات الجبر والدوال",
     description:
-      "دورة تجريبية في الرياضيات تركّز على الجبر، المعادلات، والدوال بأسلوب واضح ومتدرج. تم إعدادها لاختبار ظهور الدورات في الواجهة الرئيسية، صفحة التفاصيل، ولوحة الإدارة داخل مدرسة النور.",
+      "دورة تجريبية في الرياضيات تركّز على الجبر، المعادلات، والدوال بأسلوب واضح ومتدرج. تم إعدادها لاختبار ظهور الدورات في الواجهة الرئيسية، صفحة التفاصيل، ولوحة الإدارة داخل منصة النور.",
     image: "/images/logo.png",
     categoryId: mathCategory.id,
     instructor: "أ. محمد نور الدين",
@@ -108,10 +108,10 @@ async function main() {
   });
 
   await upsertImage({
-    title: "هوية مدرسة النور",
+    title: "هوية منصة النور",
     description: "صورة تجريبية للهوية البصرية داخل المعرض.",
     url: "/images/logo.png",
-    alt: "شعار مدرسة النور",
+    alt: "شعار منصة النور",
     order: 0,
     isActive: true,
   });
@@ -120,7 +120,7 @@ async function main() {
     title: "واجهة المنصة",
     description: "عنصر تجريبي يدعم معرض الصور في صفحات الدورات.",
     url: "/images/about-image.jpg",
-    alt: "واجهة تعليمية لمدرسة النور",
+    alt: "واجهة تعليمية لمنصة النور",
     order: 1,
     isActive: true,
   });

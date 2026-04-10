@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { isAdminUser } from "@/lib/api-auth";
+import { COURSE_IMAGE_ASPECTS, DEFAULT_COURSE_IMAGE_ASPECT } from "@/lib/course-image";
 
 const imageSchema = z
   .string()
@@ -15,11 +16,12 @@ const courseSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
   image: imageSchema.optional().or(z.literal("")).nullable(),
+  imageAspect: z.enum(COURSE_IMAGE_ASPECTS).optional().default(DEFAULT_COURSE_IMAGE_ASPECT),
   categoryId: z.string().min(1, "Category is required"),
   instructor: z.string().min(2, "Instructor name must be at least 2 characters"),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
   time: z.string().regex(/^\d{2}:\d{2}$/, "Invalid time format (HH:MM)"),
-  location: z.string().min(2, "Location must be at least 2 characters"),
+  location: z.string().optional().or(z.literal("")),
   price: z.coerce.number().min(0, "Price must be positive"),
   phone: z.string().min(6, "Phone must be at least 6 characters").optional().or(z.literal("")),
   email: z.string().email("Please enter a valid email").optional().or(z.literal("")),
@@ -97,6 +99,8 @@ export async function POST(request: Request) {
         ...rest,
         date: dateTime,
         image: rest.image || null,
+        imageAspect: rest.imageAspect || DEFAULT_COURSE_IMAGE_ASPECT,
+        location: rest.location ?? "",
         phone: rest.phone ?? "",
         email: rest.email ?? "",
       },

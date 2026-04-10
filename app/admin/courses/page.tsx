@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -36,14 +36,14 @@ export default function AdminCoursesPage() {
         const response = await fetch('/api/courses?all=true');
 
         if (!response.ok) {
-          throw new Error('Failed to fetch courses');
+          throw new Error('تعذر جلب الدورةs');
         }
 
         const data = await response.json();
         setCourses(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching courses:', error);
-        toast.error('تعذر تحميل الدورات.');
+        toast.error('ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ø¯ÙˆØ±Ø§Øª.');
         setCourses([]);
       } finally {
         setLoading(false);
@@ -67,10 +67,10 @@ export default function AdminCoursesPage() {
       }
 
       setCourses(courses.filter(course => course.id !== id));
-      toast.success('تم حذف الدورة بنجاح');
+      toast.success('ØªÙ… Ø­Ø°Ù Ø§Ù„Ø¯ÙˆØ±Ø© Ø¨Ù†Ø¬Ø§Ø­');
     } catch (error) {
       console.error('Error deleting course:', error);
-      toast.error('تعذر حذف الدورة.');
+      toast.error('ØªØ¹Ø°Ø± Ø­Ø°Ù Ø§Ù„Ø¯ÙˆØ±Ø©.');
     } finally {
       setDeletingId(null);
     }
@@ -96,10 +96,10 @@ export default function AdminCoursesPage() {
       setCourses(courses.map(course =>
         course.id === id ? { ...course, [field]: !currentStatus } : course
       ));
-      toast.success('تم تحديث حالة الدورة');
+      toast.success('ØªÙ… ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„Ø¯ÙˆØ±Ø©');
     } catch (error) {
       console.error('Error updating course:', error);
-      toast.error('تعذر تحديث حالة الدورة.');
+      toast.error('ØªØ¹Ø°Ø± ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„Ø¯ÙˆØ±Ø©.');
     } finally {
       setUpdatingId(null);
     }
@@ -132,24 +132,30 @@ export default function AdminCoursesPage() {
     <div className="container mx-auto px-4 py-8">
 
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[var(--brand-ink)]">إدارة الدورات</h1>
+        <h1 className="text-3xl font-bold text-[var(--brand-ink)]">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¯ÙˆØ±Ø§Øª</h1>
         <div className="flex flex-col md:flex-row gap-4">
           <Link href="/admin/categories/new">
             <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
               <Plus className="mr-2 h-4 w-4" />
-              إضافة فئة
+              Ø¥Ø¶Ø§ÙØ© ÙØ¦Ø©
             </Button>
           </Link>
           <Link href="/admin/courses/new">
             <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
               <Plus className="mr-2 h-4 w-4" />
-              إضافة دورة
+              Ø¥Ø¶Ø§ÙØ© Ø¯ÙˆØ±Ø©
             </Button>
           </Link>
           <Link href="/admin/course-images">
             <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
               <Plus className="mr-2 h-4 w-4" />
-              إدارة الصور
+              Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØµÙˆØ±
+            </Button>
+          </Link>
+          <Link href="/admin/registration-contact">
+            <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
+              <Plus className="mr-2 h-4 w-4" />
+              إعدادات تواصل التسجيل
             </Button>
           </Link>
         </div>
@@ -157,19 +163,19 @@ export default function AdminCoursesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>كل الدورات</CardTitle>
+          <CardTitle>ÙƒÙ„ Ø§Ù„Ø¯ÙˆØ±Ø§Øª</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>العنوان</TableHead>
-                <TableHead>المدرس</TableHead>
-                <TableHead>التاريخ</TableHead>
-                <TableHead>المكان</TableHead>
-                <TableHead>السعر</TableHead>
-                <TableHead>الحالة</TableHead>
-                <TableHead className="text-right">إجراءات</TableHead>
+                <TableHead>Ø§Ù„Ø¹Ù†ÙˆØ§Ù†</TableHead>
+                <TableHead>Ø§Ù„Ù…Ø¯Ø±Ø³</TableHead>
+                <TableHead>Ø§Ù„ØªØ§Ø±ÙŠØ®</TableHead>
+                <TableHead>Ø§Ù„Ù…ÙƒØ§Ù†</TableHead>
+                <TableHead>Ø§Ù„Ø³Ø¹Ø±</TableHead>
+                <TableHead>Ø§Ù„Ø­Ø§Ù„Ø©</TableHead>
+                <TableHead className="text-right">Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -213,7 +219,7 @@ export default function AdminCoursesPage() {
                             }
                           }}
                         >
-                          {course.featured ? 'مميزة' : 'عادية'}
+                          {course.featured ? 'Ù…Ù…ÙŠØ²Ø©' : 'Ø¹Ø§Ø¯ÙŠØ©'}
                           {updatingId === course.id && <span className="ml-2">...</span>}
                         </Badge>
                         <Badge
@@ -225,7 +231,7 @@ export default function AdminCoursesPage() {
                             }
                           }}
                         >
-                          {course.inFront ? 'تظهر في الرئيسية' : 'مخفية من الرئيسية'}
+                          {course.inFront ? 'ØªØ¸Ù‡Ø± ÙÙŠ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©' : 'Ù…Ø®ÙÙŠØ© Ù…Ù† Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©'}
                           {updatingId === course.id && <span className="ml-2">...</span>}
                         </Badge>
                       </div>
@@ -245,8 +251,8 @@ export default function AdminCoursesPage() {
                         >
                           {deletingId === course.id ? (
                             <span className="flex items-center">
-                              <span className="animate-spin mr-2">↻</span>
-                              Deleting...
+                              <span className="animate-spin mr-2">â†»</span>
+                              جارٍ الحذف...
                             </span>
                           ) : (
                             <Trash2 className="h-4 w-4" />
@@ -265,11 +271,11 @@ export default function AdminCoursesPage() {
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8">
                     <div className="flex flex-col items-center gap-4">
-                      <p className="text-gray-500">لا توجد دورات حالياً</p>
+                      <p className="text-gray-500">Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¯ÙˆØ±Ø§Øª Ø­Ø§Ù„ÙŠØ§Ù‹</p>
                       <Link href="/admin/courses/new">
                         <Button variant="outline">
                           <Plus className="mr-2 h-4 w-4" />
-                          إنشاء دورة جديدة
+                          Ø¥Ù†Ø´Ø§Ø¡ Ø¯ÙˆØ±Ø© Ø¬Ø¯ÙŠØ¯Ø©
                         </Button>
                       </Link>
                     </div>

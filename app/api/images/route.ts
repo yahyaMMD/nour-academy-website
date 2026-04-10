@@ -5,9 +5,18 @@ import { isAdminUser } from "@/lib/api-auth";
 export async function GET(request: NextRequest) {
   try {
     const activeOnly = request.nextUrl.searchParams.get("activeOnly") === "true";
+    const courseId = request.nextUrl.searchParams.get("courseId");
 
     const images = await prisma.image.findMany({
-      where: activeOnly ? { isActive: true } : {},
+      where: {
+        ...(activeOnly ? { isActive: true } : {}),
+        ...(courseId ? { courseId } : {}),
+      },
+      include: {
+        course: {
+          select: { id: true, title: true },
+        },
+      },
       orderBy: [{ order: "asc" }, { createdAt: "desc" }],
     });
 
@@ -31,7 +40,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { title, description, url, alt, order, isActive } = body;
+    const { title, description, url, alt, order, isActive, courseId } = body;
 
     if (!title || !url) {
       return NextResponse.json(
@@ -46,6 +55,7 @@ export async function POST(request: NextRequest) {
         description: description || null,
         url,
         alt: alt || title,
+        courseId: courseId || null,
         order: order || 0,
         isActive: isActive !== undefined ? isActive : true,
       },

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { isAdminUser } from "@/lib/api-auth";
+import { COURSE_IMAGE_ASPECTS } from "@/lib/course-image";
 
 const imageSchema = z
   .string()
@@ -15,6 +16,7 @@ const updateSchema = z.object({
   title: z.string().min(2).optional(),
   description: z.string().min(10).optional(),
   image: imageSchema.optional().or(z.literal("")).nullable(),
+  imageAspect: z.enum(COURSE_IMAGE_ASPECTS).optional(),
   categoryId: z.string().min(1).optional(),
   instructor: z.string().min(2).optional(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),

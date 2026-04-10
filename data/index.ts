@@ -79,8 +79,8 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
-    title: "Afaq Academy",
-    des: "Afaq Academy is an e-learning platform designed to provide educational resources, courses, and tools to empower learners. It likely focuses on accessibility, high-quality content, and a user-friendly experience, tailored to help students and professionals achieve their goals. Would you like me to craft a detailed description or highlight specific features?",
+    title: "Afaq Platform",
+    des: "Afaq Platform is an e-learning platform designed to provide educational resources, courses, and tools to empower learners. It likely focuses on accessibility, high-quality content, and a user-friendly experience, tailored to help students and professionals achieve their goals. Would you like me to craft a detailed description or highlight specific features?",
     img: "/images/afaqacademy.png",
     iconLists: ["/images/nextjs.svg", "/images/tailwind.svg", "/images/typescript.svg", "/images/mongodb.svg"],
     link: "https://www.afaqacademie.com/",

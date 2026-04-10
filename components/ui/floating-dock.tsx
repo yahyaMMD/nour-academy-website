@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { cn } from "@/utils";
 import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
 import {
@@ -203,21 +203,21 @@ function IconContainer({
 export function FloatingDockDemo() {
   const links = [
     {
-      title: "Home",
+      title: "الرئيسية",
       icon: (
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
-      title: "Products",
+      title: "البرامج",
       icon: (
         <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
-      title: "LinkedIn",
+      title: "لينكدإن",
       icon: (
         <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
@@ -225,7 +225,7 @@ export function FloatingDockDemo() {
       target: "_blank",
     },
     {
-      title: "Twitter",
+      title: "إكس",
       icon: (
         <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
@@ -233,7 +233,7 @@ export function FloatingDockDemo() {
       target: "_blank",
     },
     {
-      title: "GitHub",
+      title: "جيت هب",
       icon: (
         <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),

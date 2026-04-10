@@ -40,7 +40,7 @@ const Hero = () => {
             {brand.taglineAr}
           </div>
 
-          <h1 className="mb-5 font-[var(--font-brand-heading)] text-4xl font-extrabold leading-[1.2] text-[var(--brand-ink)] md:text-6xl">
+          <h1 className="mb-5 font-[var(--font-brand-heading)] text-4xl font-extrabold leading-[1.24] text-[var(--brand-ink)] md:text-6xl md:leading-[1.32] lg:leading-[1.38]">
             هنا يبدأ
             <span className="brand-gradient-text"> التفوق الحقيقي </span>
             بخطوات واضحة وثقة أكبر.

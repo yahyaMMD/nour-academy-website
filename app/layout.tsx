@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: [
     brand.nameAr,
     brand.nameEn,
-    "مدرسة",
+    "منصة",
     "تعليم",
     "منصة تعليمية",
     "برامج دراسية",

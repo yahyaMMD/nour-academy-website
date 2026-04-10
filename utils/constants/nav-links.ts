@@ -5,7 +5,7 @@ export const NAV_LINKS = [
         href: "/",
     },
     {
-        title: "عن المدرسة",
+        title: "عن المنصة",
         href: "/about",
     },
     {

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -8,13 +8,13 @@ export default function CreateCategoryPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
-    description: ''
+    description: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,38 +34,38 @@ export default function CreateCategoryPage() {
         router.push('/admin/categories');
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create category');
+        throw new Error(errorData.error || 'تعذر إنشاء المادة');
       }
     } catch (error) {
       console.error('Error creating category:', error);
-      alert(error instanceof Error ? error.message : 'An unknown error occurred');
+      alert(error instanceof Error ? error.message : 'حدث خطأ غير معروف');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
       <div className="max-w-md mx-auto">
         <div className="flex justify-start mb-4">
           <button
             onClick={() => router.push('/admin/categories')}
             className="flex items-center text-[var(--brand-primary)] hover:text-[#236d90] transition-colors"
           >
-            <FiArrowLeft className="mr-2" />
-            Back to Categories
+            <FiArrowLeft className="ml-2" />
+            العودة إلى المواد
           </button>
         </div>
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[var(--brand-ink)]">Create New Category</h1>
+          <h1 className="text-3xl font-bold text-[var(--brand-ink)]">إنشاء مادة جديدة</h1>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-lg font-medium text-gray-700">
-                Category Name *
+              <label htmlFor="name" className="block text-lg font-medium text-[var(--brand-ink)]">
+                اسم المادة *
               </label>
               <input
                 type="text"
@@ -79,8 +79,8 @@ export default function CreateCategoryPage() {
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-lg font-medium text-gray-700">
-                Description
+              <label htmlFor="description" className="block text-lg font-medium text-[var(--brand-ink)]">
+                الشعبة
               </label>
               <textarea
                 id="description"
@@ -97,20 +97,14 @@ export default function CreateCategoryPage() {
                 type="submit"
                 disabled={isSubmitting}
                 className={`py-3 px-6 rounded-xl text-white font-bold text-lg transition-all ${
-                  isSubmitting 
-                    ? 'bg-[#236d90]' 
-                    : 'bg-[var(--brand-primary)] hover:bg-[#236d90] shadow-lg hover:shadow-xl'
+                  isSubmitting ? 'bg-[#236d90]' : 'bg-[var(--brand-primary)] hover:bg-[#236d90] shadow-lg hover:shadow-xl'
                 }`}
               >
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Creating...
-                  </span>
-                ) : 'Create Category'}
+                  <span className="flex items-center justify-center">جارٍ الإنشاء...</span>
+                ) : (
+                  'إنشاء المادة'
+                )}
               </button>
             </div>
           </form>

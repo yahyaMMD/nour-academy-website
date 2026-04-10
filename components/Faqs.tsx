@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+﻿import React, { ReactNode } from "react";
 import { Accordion, AccordionBody, AccordionHeader } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Tag } from "./tag";
+import AppDownloadPromo from "./AppDownloadPromo";
 
 type AccordionItem = {
   id: number;
@@ -28,7 +29,7 @@ function Icon({ id, open }: { id: number; open: number }) {
 const accordionData: AccordionItem[] = [
   {
     id: 1,
-    header: "ما الذي يجعل مدرسة النور مختلفة؟",
+    header: "ما الذي يجعل منصة النور مختلفة؟",
     body: "لأنها لا تكتفي بعرض الدروس، بل تبني تجربة كاملة يشعر فيها الطالب بالوضوح، الحافز، والمتابعة التي تدفعه للتقدم بثقة.",
   },
   {
@@ -38,8 +39,8 @@ const accordionData: AccordionItem[] = [
   },
   {
     id: 3,
-    header: "هل المدرسة مناسبة فقط للمتفوقين؟",
-    body: "أبدا. المدرسة مناسبة لكل طالب يريد أن يتقدم، سواء كان يبحث عن دعم إضافي، تنظيم أفضل، أو مستوى أعلى من الإنجاز.",
+    header: "هل المنصة مناسبة فقط للمتفوقين؟",
+    body: "أبدًا. المنصة مناسبة لكل طالب يريد أن يتقدم، سواء كان يبحث عن دعم إضافي، تنظيم أفضل، أو مستوى أعلى من الإنجاز.",
   },
   {
     id: 4,
@@ -67,7 +68,7 @@ export function FAQSection() {
           viewport={{ once: true }}
         >
           <div className="mb-6 flex justify-center">
-            <Tag className="bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]">FAQ</Tag>
+            <Tag className="bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]">الأسئلة الشائعة</Tag>
           </div>
           <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)] md:text-5xl">
             أسئلة <span className="text-[var(--brand-accent)]">تدور في بالك</span>
@@ -103,9 +104,7 @@ export function FAQSection() {
                 >
                   {header}
                 </AccordionHeader>
-                <AccordionBody className="px-5 pb-6 pt-1 text-base leading-8 text-[var(--brand-muted)]">
-                  {body}
-                </AccordionBody>
+                <AccordionBody className="px-5 pb-6 pt-1 text-base leading-8 text-[var(--brand-muted)]">{body}</AccordionBody>
               </Accordion>
             </motion.div>
           ))}
@@ -133,6 +132,8 @@ export function FAQSection() {
             </Link>
           </div>
         </motion.div>
+
+        <AppDownloadPromo compact className="mt-10" />
       </div>
     </section>
   );

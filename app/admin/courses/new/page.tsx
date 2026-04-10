@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -9,28 +9,35 @@ import { z } from 'zod';
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { FiUser, FiMail, FiPhone, FiMapPin, FiDollarSign, FiClock, FiUpload, FiX } from 'react-icons/fi';
+import { FiUser, FiMail, FiPhone, FiDollarSign, FiClock, FiUpload, FiX } from 'react-icons/fi';
+import {
+  COURSE_IMAGE_ASPECTS,
+  DEFAULT_COURSE_IMAGE_ASPECT,
+  getCourseImageAspectClass,
+  normalizeCourseImageAspect,
+} from '@/lib/course-image';
 
 const imageInputSchema = z
   .string()
   .trim()
   .refine(
     (value) => value === '' || value.startsWith('/') || /^https?:\/\//i.test(value),
-    'Please enter a valid URL or public path'
+    'يرجى إدخال رابط صحيح أو مسار عام'
   );
 
 const formSchema = z.object({
-  title: z.string().min(2, 'Title must be at least 2 characters'),
-  description: z.string().min(10, 'Description must be at least 10 characters'),
+  title: z.string().min(2, 'العنوان يجب أن يكون حرفين على الأقل'),
+  description: z.string().min(10, 'الوصف يجب أن يكون 10 أحرف على الأقل'),
   image: imageInputSchema.optional().or(z.literal('')),
-  categoryId: z.string().min(1, 'Please select a category'),
-  instructor: z.string().min(2, 'Instructor name must be at least 2 characters'),
+  imageAspect: z.enum(COURSE_IMAGE_ASPECTS),
+  categoryId: z.string().min(1, 'يرجى اختيار فئة'),
+  instructor: z.string().min(2, 'اسم الأستاذ يجب أن يكون حرفين على الأقل'),
   date: z.date(),
-  time: z.string().regex(/^\d{2}:\d{2}$/, 'Please enter a valid time (HH:MM)'),
-  location: z.string().min(2, 'Location must be at least 2 characters'),
-  price: z.number().min(0, 'Price must be positive'),
-  phone: z.string().min(6, 'Phone must be at least 6 characters').optional().or(z.literal('')),
-  email: z.string().email('Please enter a valid email').optional().or(z.literal('')),
+  time: z.string().regex(/^\d{2}:\d{2}$/, 'يرجى إدخال وقت صحيح (HH:MM)'),
+  location: z.string().optional().or(z.literal('')),
+  price: z.number().min(0, 'السعر يجب أن يكون موجبا'),
+  phone: z.string().min(6, 'رقم الهاتف يجب أن يكون 6 أحرف على الأقل').optional().or(z.literal('')),
+  email: z.string().email('يرجى إدخال بريد إلكتروني صحيح').optional().or(z.literal('')),
   featured: z.boolean(),
   inFront: z.boolean(),
 });
@@ -44,7 +51,7 @@ export default function CourseForm() {
   const router = useRouter();
   const params = useParams<{ id?: string }>();
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setالفئات] = useState<Category[]>([]);
   const [date, setDate] = useState<Date>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -56,6 +63,7 @@ export default function CourseForm() {
       title: '',
       description: '',
       image: '',
+      imageAspect: DEFAULT_COURSE_IMAGE_ASPECT,
       categoryId: '',
       instructor: '',
       date: new Date(),
@@ -77,16 +85,16 @@ export default function CourseForm() {
         // Fetch categories
         const categoriesResponse = await fetch('/api/categories');
         if (!categoriesResponse.ok) {
-          throw new Error('Failed to fetch categories');
+          throw new Error('تعذر جلب الفئات');
         }
         const categoriesData = await categoriesResponse.json();
-        setCategories(categoriesData || []);
+        setالفئات(categoriesData || []);
 
         // Fetch course data if editing
         if (params?.id) {
           const courseResponse = await fetch(`/api/courses/${params.id}`);
           if (!courseResponse.ok) {
-            throw new Error('Failed to fetch course');
+            throw new Error('تعذر جلب الدورة');
           }
           const { data: courseData } = await courseResponse.json();
 
@@ -95,6 +103,7 @@ export default function CourseForm() {
 
           form.reset({
             ...courseData,
+            imageAspect: normalizeCourseImageAspect(courseData.imageAspect),
             date: courseDate,
             time: formattedTime,
             price: parseFloat(courseData.price),
@@ -106,7 +115,7 @@ export default function CourseForm() {
           }
         }
       } catch (error) {
-        toast.error('Failed to load data');
+        toast.error('تعذر تحميل البيانات');
         console.error('Error loading data:', error);
       } finally {
         setLoading(false);
@@ -124,12 +133,12 @@ export default function CourseForm() {
 
     // File validation
     if (!file.type.match('image/(jpeg|png|gif|webp)')) {
-      toast.error('Please upload a JPEG, PNG, GIF, or WebP image');
+      toast.error('يرجى رفع صورة بصيغة JPEG أو PNG أو GIF أو WebP');
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
+      toast.error('يجب أن يكون حجم الصورة أقل من 5MB');
       return;
     }
 
@@ -151,18 +160,18 @@ export default function CourseForm() {
       });
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        throw new Error('فشل الرفع');
       }
 
       const { url } = await response.json();
 
       // Update form field
       form.setValue('image', url, { shouldValidate: true });
-      toast.success('Image uploaded successfully!');
+      toast.success('تم رفع الصورة بنجاح!');
 
     } catch (error) {
       console.error('Upload error:', error);
-      toast.error(`Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      toast.error(`فشل الرفع: ${error instanceof Error ? error.message : 'Unknown error'}`);
       setImagePreview(null);
       form.setValue('image', '', { shouldValidate: true });
     } finally {
@@ -173,6 +182,7 @@ export default function CourseForm() {
     setImagePreview(null);
     form.setValue('image', '');
   };
+  const selectedImageAspect = form.watch('imageAspect');
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -192,15 +202,15 @@ export default function CourseForm() {
       });
 
       if (response.ok) {
-        toast.success(params?.id ? 'Course updated successfully' : 'Course created successfully');
+        toast.success(params?.id ? 'تم تحديث الدورة بنجاح' : 'تم إنشاء الدورة بنجاح');
         router.push('/admin/courses');
         router.refresh();
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to save course');
+        throw new Error(errorData.error || 'تعذر حفظ الدورة');
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to save course';
+      const message = error instanceof Error ? error.message : 'تعذر حفظ الدورة';
       toast.error(message);
       console.error('Error saving course:', error);
     }
@@ -219,22 +229,22 @@ export default function CourseForm() {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-extrabold text-[var(--brand-ink)] mb-4">
-            {params?.id ? 'Edit Course' : 'Create New Course'}
+            {params?.id ? 'تعديل الدورة' : 'إنشاء دورة جديدة'}
           </h1>
-          <p className="text-xl text-gray-600">
-            {params?.id ? 'Update course details' : 'Add a new course to your platform'}
+          <p className="text-xl text-[var(--brand-muted)]">
+            {params?.id ? 'تحديث تفاصيل الدورة' : 'إضافة دورة جديدة إلى المنصة'}
           </p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 sm:p-10">
-            {/* Course Title */}
+            {/* Course العنوان */}
             <div className="mb-8">
-              <label className="block text-lg font-medium text-gray-700 mb-3">
-                Title *
+              <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                العنوان *
               </label>
               <input
-                placeholder="Course title"
+                placeholder="عنوان الدورة"
                 className="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
                 {...form.register('title')}
               />
@@ -245,13 +255,13 @@ export default function CourseForm() {
               )}
             </div>
 
-            {/* Description */}
+            {/* الوصف */}
             <div className="mb-8">
-              <label className="block text-lg font-medium text-gray-700 mb-3">
-                Description *
+              <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                الوصف *
               </label>
               <textarea
-                placeholder="Course description"
+                placeholder="وصف الدورة"
                 rows={6}
                 className="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
                 {...form.register('description')}
@@ -267,20 +277,50 @@ export default function CourseForm() {
 
             {/* Image Upload */}
             <div className="mb-8">
-              <label className="block text-lg font-medium text-gray-700 mb-3">
-                Course Image
+              <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                صورة الدورة
               </label>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-[var(--brand-ink)] mb-2">
+                  أبعاد الصورة *
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="flex cursor-pointer items-center justify-center rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold transition has-[:checked]:border-[var(--brand-primary)] has-[:checked]:bg-[var(--brand-primary-soft)]">
+                    <input
+                      type="radio"
+                      value="16:9"
+                      className="sr-only"
+                      {...form.register('imageAspect')}
+                    />
+                    16:9
+                  </label>
+                  <label className="flex cursor-pointer items-center justify-center rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold transition has-[:checked]:border-[var(--brand-primary)] has-[:checked]:bg-[var(--brand-primary-soft)]">
+                    <input
+                      type="radio"
+                      value="4:5"
+                      className="sr-only"
+                      {...form.register('imageAspect')}
+                    />
+                    4:5
+                  </label>
+                </div>
+                {form.formState.errors.imageAspect && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {form.formState.errors.imageAspect.message}
+                  </p>
+                )}
+              </div>
 
               {imagePreview ? (
                 <div className="relative group">
                   <div className="max-w-full overflow-hidden rounded-xl border border-gray-200">
-                    <div className="relative h-[500px] w-full">
+                    <div className={`relative w-full bg-[var(--brand-surface)] ${getCourseImageAspectClass(selectedImageAspect)}`}>
                       <Image
                         src={imagePreview}
                         alt="Course preview"
                         fill
                         unoptimized
-                        className="object-contain"
+                        className="object-cover"
                       />
                     </div>
                   </div>
@@ -296,7 +336,7 @@ export default function CourseForm() {
                 <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
                   <div className="flex flex-col items-center justify-center">
                     <FiUpload className="w-12 h-12 text-gray-400 mb-3" />
-                    <p className="text-lg text-gray-600 mb-3">Drag & drop your image here or click to browse</p>
+                    <p className="text-lg text-[var(--brand-muted)] mb-3">اسحب الصورة هنا أو انقر للاختيار</p>
                     <input
                       type="file"
                       id="image-upload"
@@ -312,17 +352,17 @@ export default function CourseForm() {
                           : 'bg-[var(--brand-primary)] hover:bg-[#236d90] cursor-pointer'
                         }`}
                     >
-                      {uploading ? 'Uploading...' : 'Select Image'}
+                      {uploading ? 'جارٍ الرفع...' : 'اختر صورة'}
                     </label>
-                    <p className="mt-2 text-sm text-gray-500">Supports: JPEG, PNG, GIF, WebP (Max 5MB)</p>
+                    <p className="mt-2 text-sm text-gray-500">الصيغ المدعومة: JPEG و PNG و GIF و WebP (حد أقصى 5MB)</p>
                   </div>
                 </div>
               )}
 
               {/* Fallback URL input */}
               <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Or enter image URL
+                <label className="block text-sm font-medium text-[var(--brand-ink)] mb-1">
+                  أو أدخل رابط الصورة
                 </label>
                 <input
                   placeholder="https://example.com/image.jpg"
@@ -341,16 +381,16 @@ export default function CourseForm() {
 
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {/* Category */}
+              {/* الفئة */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Category *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  الفئة *
                 </label>
                 <select
                   className="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
                   {...form.register('categoryId')}
                 >
-                  <option value="">Select a category</option>
+                  <option value="">اختر فئة</option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
@@ -364,17 +404,17 @@ export default function CourseForm() {
                 )}
               </div>
 
-              {/* Instructor */}
+              {/* الأستاذ */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Instructor *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  الأستاذ *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <FiUser className="text-gray-400" />
                   </div>
                   <input
-                    placeholder="Instructor name"
+                    placeholder="اسم الأستاذ"
                     className="w-full pl-10 px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
                     {...form.register('instructor')}
                   />
@@ -386,10 +426,10 @@ export default function CourseForm() {
                 )}
               </div>
 
-              {/* Date */}
+              {/* التاريخ */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Date *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  التاريخ *
                 </label>
                 <div className="relative">
                   <button
@@ -398,7 +438,7 @@ export default function CourseForm() {
                     className="flex h-14 w-full rounded-xl border border-gray-300 bg-background pl-10 pr-3 py-4 text-lg text-left items-center"
                   >
                     <CalendarIcon className="absolute left-3 h-5 w-5 text-gray-400" />
-                    {date ? format(date, 'PPP') : 'Pick a date'}
+                    {date ? format(date, 'PPP') : 'اختر تاريخا'}
                   </button>
                   {showCalendar && (
                     <div className="absolute z-10 mt-1 w-auto p-2 bg-white border rounded-xl shadow-lg">
@@ -410,7 +450,7 @@ export default function CourseForm() {
                               newDate.setMonth(newDate.getMonth() - 1);
                               setDate(newDate);
                             }}
-                            className="p-1 rounded hover:bg-gray-100"
+                            className="p-1 rounded hover:bg-[var(--brand-primary-soft)]"
                           >
                             &lt;
                           </button>
@@ -423,7 +463,7 @@ export default function CourseForm() {
                               newDate.setMonth(newDate.getMonth() + 1);
                               setDate(newDate);
                             }}
-                            className="p-1 rounded hover:bg-gray-100"
+                            className="p-1 rounded hover:bg-[var(--brand-primary-soft)]"
                           >
                             &gt;
                           </button>
@@ -451,8 +491,8 @@ export default function CourseForm() {
                               className={`h-8 w-8 rounded-full flex items-center justify-center text-sm ${isSelected
                                   ? 'bg-[var(--brand-ink)] text-white'
                                   : isToday
-                                    ? 'bg-gray-100'
-                                    : 'hover:bg-gray-100'
+                                    ? 'bg-[var(--brand-primary-soft)]'
+                                    : 'hover:bg-[var(--brand-primary-soft)]'
                                 }`}
                             >
                               {day}
@@ -470,10 +510,10 @@ export default function CourseForm() {
                 )}
               </div>
 
-              {/* Time */}
+              {/* الوقت */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Time *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  الوقت *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -492,32 +532,10 @@ export default function CourseForm() {
                 )}
               </div>
 
-              {/* Location */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Location *
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FiMapPin className="text-gray-400" />
-                  </div>
-                  <input
-                    placeholder="Course location"
-                    className="w-full pl-10 px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
-                    {...form.register('location')}
-                  />
-                </div>
-                {form.formState.errors.location && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {form.formState.errors.location.message}
-                  </p>
-                )}
-              </div>
-
               {/* Price */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Price (DA) *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  السعر (دج) *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -538,17 +556,17 @@ export default function CourseForm() {
                 )}
               </div>
 
-              {/* Contact Phone */}
+              {/* هاتف التواصل */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Contact Phone *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  هاتف التواصل *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <FiPhone className="text-gray-400" />
                   </div>
                   <input
-                    placeholder="Phone number"
+                    placeholder="رقم الهاتف"
                     className="w-full pl-10 px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
                     {...form.register('phone')}
                   />
@@ -560,17 +578,17 @@ export default function CourseForm() {
                 )}
               </div>
 
-              {/* Contact Email */}
+              {/* بريد التواصل */}
               <div>
-                <label className="block text-lg font-medium text-gray-700 mb-3">
-                  Contact Email *
+                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+                  بريد التواصل *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <FiMail className="text-gray-400" />
                   </div>
                   <input
-                    placeholder="Email address"
+                    placeholder="البريد الإلكتروني"
                     className="w-full pl-10 px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
                     {...form.register('email')}
                   />
@@ -592,8 +610,8 @@ export default function CourseForm() {
                   className="h-5 w-5 text-[var(--brand-primary)] focus:ring-[var(--brand-primary)] border-gray-300 rounded"
                   {...form.register('featured')}
                 />
-                <label htmlFor="featured" className="ml-2 block text-lg text-gray-700">
-                  Featured Course
+                <label htmlFor="featured" className="ml-2 block text-lg text-[var(--brand-ink)]">
+                  دورة مميزة
                 </label>
               </div>
               <div className="flex items-center">
@@ -603,8 +621,8 @@ export default function CourseForm() {
                   className="h-5 w-5 text-[var(--brand-primary)] focus:ring-[var(--brand-primary)] border-gray-300 rounded"
                   {...form.register('inFront')}
                 />
-                <label htmlFor="inFront" className="ml-2 block text-lg text-gray-700">
-                  Show on Homepage
+                <label htmlFor="inFront" className="ml-2 block text-lg text-[var(--brand-ink)]">
+                  إظهار في الصفحة الرئيسية
                 </label>
               </div>
             </div>
@@ -625,10 +643,10 @@ export default function CourseForm() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    {params?.id ? 'Updating...' : 'Creating...'}
+                    {params?.id ? 'جارٍ التحديث...' : 'جارٍ الإنشاء...'}
                   </span>
                 ) : (
-                  params?.id ? 'Update Course' : 'Create Course'
+                  params?.id ? 'تحديث الدورة' : 'إنشاء الدورة'
                 )}
               </button>
             </div>

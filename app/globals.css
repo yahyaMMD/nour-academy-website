@@ -17,6 +17,10 @@
   --font-brand-heading: "SC Sharjah", "Noto Kufi Arabic", "Tajawal", sans-serif;
   --font-brand-body: "Al-Jazeera Arabic", "Tajawal", sans-serif;
   --font-brand-display: "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --line-height-heading: 1.3;
+  --line-height-body: 1.85;
+  --line-height-heading-lg: 1.42;
+  --line-height-body-lg: 2;
 }
 
 html {
@@ -26,6 +30,7 @@ html {
 body {
   min-height: 100vh;
   font-family: var(--font-brand-body);
+  line-height: var(--line-height-body);
   color: var(--brand-ink);
   background:
     radial-gradient(circle at top left, rgba(45, 131, 173, 0.14), transparent 28%),
@@ -40,6 +45,26 @@ h4,
 h5,
 h6 {
   font-family: var(--font-brand-heading);
+  line-height: var(--line-height-heading);
+}
+
+p {
+  line-height: var(--line-height-body);
+}
+
+@media (min-width: 1024px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: var(--line-height-heading-lg);
+  }
+
+  p {
+    line-height: var(--line-height-body-lg);
+  }
 }
 
 ::selection {

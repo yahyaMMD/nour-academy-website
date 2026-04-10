@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 
@@ -24,7 +24,7 @@ export default function AdminRegistrationsPage() {
         const data = await response.json();
         setRegistrations(data);
       } catch (error) {
-        setError('تعذر تحميل التسجيلات: ' + (error instanceof Error ? error.message : 'خطأ غير معروف'));
+        setError('ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ³Ø¬ÙŠÙ„Ø§Øª: ' + (error instanceof Error ? error.message : 'Ø®Ø·Ø£ ØºÙŠØ± Ù…Ø¹Ø±ÙˆÙ'));
       } finally {
         setLoading(false);
       }
@@ -48,10 +48,10 @@ export default function AdminRegistrationsPage() {
           prev.map((reg) => (reg.id === id ? { ...reg, status } : reg))
         );
       } else {
-        alert('تعذر تحديث الحالة');
+        alert('ØªØ¹Ø°Ø± ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø­Ø§Ù„Ø©');
       }
     } catch (error) {
-      alert('تعذر تحديث الحالة ' + (error instanceof Error ? error.message : 'خطأ غير معروف'));
+      alert('ØªØ¹Ø°Ø± ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø­Ø§Ù„Ø© ' + (error instanceof Error ? error.message : 'Ø®Ø·Ø£ ØºÙŠØ± Ù…Ø¹Ø±ÙˆÙ'));
     }
   };
 
@@ -65,26 +65,26 @@ export default function AdminRegistrationsPage() {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-[var(--brand-ink)]">تسجيلات الدورات</h1>
+      <h1 className="text-2xl font-bold mb-6 text-[var(--brand-ink)]">ØªØ³Ø¬ÙŠÙ„Ø§Øª Ø§Ù„Ø¯ÙˆØ±Ø§Øª</h1>
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
-            <tr className="bg-gray-100 text-left text-sm font-semibold text-gray-600">
-              <th className="px-4 py-3 border-b">الاسم</th>
-              <th className="px-4 py-3 border-b">الدورة</th>
-              <th className="px-4 py-3 border-b">البريد</th>
-              <th className="px-4 py-3 border-b">الهاتف</th>
-              <th className="px-4 py-3 border-b">التاريخ</th>
-              <th className="px-4 py-3 border-b">الحالة</th>
-              <th className="px-4 py-3 border-b">إجراءات</th>
+            <tr className="bg-[var(--brand-primary-soft)] text-left text-sm font-semibold text-[var(--brand-muted)]">
+              <th className="px-4 py-3 border-b">Ø§Ù„Ø§Ø³Ù…</th>
+              <th className="px-4 py-3 border-b">Ø§Ù„Ø¯ÙˆØ±Ø©</th>
+              <th className="px-4 py-3 border-b">Ø§Ù„Ø¨Ø±ÙŠØ¯</th>
+              <th className="px-4 py-3 border-b">Ø§Ù„Ù‡Ø§ØªÙ</th>
+              <th className="px-4 py-3 border-b">Ø§Ù„ØªØ§Ø±ÙŠØ®</th>
+              <th className="px-4 py-3 border-b">Ø§Ù„Ø­Ø§Ù„Ø©</th>
+              <th className="px-4 py-3 border-b">Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
             </tr>
           </thead>
           <tbody>
             {registrations.map((reg) => (
-              <tr key={reg.id} className="text-sm text-gray-700">
+              <tr key={reg.id} className="text-sm text-[var(--brand-ink)]">
                 <td className="px-4 py-2 border-b">{reg.fullName}</td>
                 <td className="px-4 py-2 border-b">{reg.course?.title}</td>
                 <td className="px-4 py-2 border-b">{reg.email}</td>
@@ -110,19 +110,19 @@ export default function AdminRegistrationsPage() {
                     onClick={() => updateStatus(reg.id, 'confirmed')}
                     className="text-green-600 hover:underline text-xs"
                   >
-                    تأكيد
+                    ØªØ£ÙƒÙŠØ¯
                   </button>
                   <button
                     onClick={() => updateStatus(reg.id, 'pending')}
                     className="text-yellow-600 hover:underline text-xs"
                   >
-                    انتظار
+                    Ø§Ù†ØªØ¸Ø§Ø±
                   </button>
                   <button
                     onClick={() => updateStatus(reg.id, 'cancelled')}
                     className="text-red-600 hover:underline text-xs"
                   >
-                    إلغاء
+                    Ø¥Ù„ØºØ§Ø¡
                   </button>
                 </td>
               </tr>

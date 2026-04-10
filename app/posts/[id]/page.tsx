@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -30,7 +30,7 @@ export default function PageArticle() {
           router.replace('/404');
         }
       } catch (error) {
-        console.error('Erreur lors de la récupération de l\'article :', error);
+        console.error('خطأ أثناء جلب المقال:', error);
         router.replace('/404');
       } finally {
         setIsLoading(false);
@@ -58,17 +58,17 @@ export default function PageArticle() {
 
   if (!post) {
     return (
-      <div className="max-w-4xl mx-auto py-8 px-4 text-center">
-        <h1 className="text-3xl font-bold mb-4">Article introuvable</h1>
-        <p>L&#39;article que vous recherchez n&#39;existe pas ou a peut-être été supprimé.</p>
+      <div className="max-w-4xl mx-auto py-8 px-4 text-center" dir="rtl">
+        <h1 className="text-3xl font-bold mb-4">المقال غير موجود</h1>
+        <p>المقال الذي تبحث عنه غير موجود أو تم حذفه.</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
+    <div className="max-w-4xl mx-auto py-8 px-4" dir="rtl">
       <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-      
+
       {post.imageUrl && (
         <div className="relative mb-6 h-[420px] w-full overflow-hidden rounded-lg">
           <Image
@@ -80,7 +80,7 @@ export default function PageArticle() {
           />
         </div>
       )}
-      
+
       {post.videoUrl && (
         <div className="aspect-w-16 aspect-h-9 mb-6">
           <iframe
@@ -91,7 +91,7 @@ export default function PageArticle() {
           ></iframe>
         </div>
       )}
-      
+
       <div className="prose max-w-none">
         <p className="text-lg">{post.description}</p>
       </div>

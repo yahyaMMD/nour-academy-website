@@ -18,13 +18,13 @@ const pillars = [
   {
     title: "النتيجة تبدأ من التجربة",
     description:
-      "كل تفصيل في المدرسة صُمم ليمنح الطالب شعورا بالوضوح والجدية والانتماء، لأن الأداء القوي يبدأ من إحساس داخلي قوي.",
+      "كل تفصيل في المنصة صُمم ليمنح الطالب شعورا بالوضوح والجدية والانتماء، لأن الأداء القوي يبدأ من إحساس داخلي قوي.",
     color: "bg-[var(--brand-highlight-soft)]",
   },
 ];
 
 const stats = [
-  { label: "رؤية المدرسة", value: "تفوق", color: "text-[var(--brand-primary)]" },
+  { label: "رؤية المنصة", value: "تفوق", color: "text-[var(--brand-primary)]" },
   { label: "أسلوبنا", value: "واضح", color: "text-[var(--brand-accent)]" },
   { label: "أثرنا", value: "ثقة", color: "text-[var(--brand-ink)]" },
 ];
@@ -42,12 +42,12 @@ const About = () => {
             viewport={{ once: true }}
           >
             <p className="mb-4 text-sm font-semibold text-[var(--brand-primary)]">من نحن</p>
-            <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.45] text-[var(--brand-ink)] md:text-4xl">
-              مدرسة تؤمن أن الطالب حين يفهم جيدا
+            <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.36] text-[var(--brand-ink)] md:text-4xl md:leading-[1.38]">
+              منصة تؤمن أن الطالب حين يفهم جيدا
               <span className="text-[var(--brand-accent)]"> يقدر أن يتفوق بثبات.</span>
             </h2>
             <p className="mb-6 text-lg leading-8 text-[var(--brand-muted)]">
-              في مدرسة النور لا نقدم محتوى تعليميا باردا أو مكررا. نحن نبني تجربة كاملة تجعل الطالب أكثر تركيزا،
+              في منصة النور لا نقدم محتوى تعليميا باردا أو مكررا. نحن نبني تجربة كاملة تجعل الطالب أكثر تركيزا،
               أكثر راحة، وأكثر استعدادا ليبذل جهده لأنه يرى الطريق أمامه بوضوح.
             </p>
 

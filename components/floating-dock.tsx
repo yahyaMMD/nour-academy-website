@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Note: Use position fixed according to your needs
  * Desktop navbar is better positioned at the bottom
  * Mobile navbar is better positioned at bottom right.
@@ -211,21 +211,21 @@ function IconContainer({
 export function FloatingDockDemo() {
   const links = [
     {
-      title: "Home",
+      title: "الرئيسية",
       icon: (
         <IconHome className="h-full w-full text-[#6C3C74] dark:text-[#6C3C74]" />
       ),
       href: "#",
     },
     {
-      title: "Products",
+      title: "البرامج",
       icon: (
         <IconTerminal2 className="h-full w-full text-[#6C3C74] dark:text-[#6C3C74]" />
       ),
       href: "#",
     },
     {
-      title: "Instagram",
+      title: "إنستغرام",
       icon: (
         <IconBrandInstagram className="h-full w-full text-[#6C3C74] dark:text-[#6C3C74]" />
       ),
@@ -233,7 +233,7 @@ export function FloatingDockDemo() {
       target: "_blank",
     },
     {
-      title: "Tiktok",
+      title: "تيك توك",
       icon: (
         <IconBrandTiktok className="h-full w-full text-[#6C3C74] dark:text-[#6C3C74]" />
       ),
@@ -241,7 +241,7 @@ export function FloatingDockDemo() {
       target: "_blank",
     },
     {
-      title: "Facebook",
+      title: "فيسبوك",
       icon: (
         <IconBrandFacebook className="h-full w-full text-[#6C3C74] dark:text-[#6C3C74]" />
       ),

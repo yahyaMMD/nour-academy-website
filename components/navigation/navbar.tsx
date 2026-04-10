@@ -19,6 +19,7 @@ import BrandLogo from "@/components/BrandLogo";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session, status } = useSession();
 
   useEffect(() => {
@@ -42,6 +43,7 @@ const Navbar = () => {
             initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.45 }}
+            className={`transition-opacity duration-200 ${mobileMenuOpen ? "opacity-0 lg:opacity-100" : "opacity-100"}`}
           >
             <BrandLogo />
           </motion.div>
@@ -128,7 +130,7 @@ const Navbar = () => {
           )}
 
           <div className="lg:hidden">
-            <MobileNavbar />
+            <MobileNavbar onMenuStateChange={setMobileMenuOpen} />
           </div>
         </div>
       </div>

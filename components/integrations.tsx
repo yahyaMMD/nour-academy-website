@@ -1,63 +1,60 @@
-import { Tag } from "./tag"
+﻿import { Tag } from "./tag"
 import { IntegrationColumns } from "./integration-column"
 
 const partners = [
   {
     name: "YOUJOY",
     icon: "/images/YOUJOY.png",
-    description: "Spécialiste des appareils radiographiques dentaires, offrant des solutions d'imagerie diagnostique haute résolution.",
+    description: "متخصص في أجهزة التصوير الشعاعي السني، ويوفر حلول تصوير تشخيصي عالية الدقة.",
   },
   {
     name: "Anthos",
     icon: "/images/Anthos.png",
-    description: "Fabricant de pièces à main dentaires et turbines offrant précision chirurgicale et durabilité exceptionnelle.",
+    description: "مصنّع لأدوات الأسنان اليدوية والتوربينات بدقة جراحية ومتانة عالية.",
   },
   {
     name: "MyRay",
     icon: "/images/mayray.png",
-    description: "Fournisseur de systèmes d'imagerie dentaire 2D/3D et équipements radiologiques innovants.",
+    description: "مزود لأنظمة تصوير الأسنان ثنائية وثلاثية الأبعاد ومعدات أشعة مبتكرة.",
   },
   {
     name: "W&H",
     icon: "/images/W&H.png",
-    description: "Leader en technologie de fraisage dentaire et solutions implantaires de pointe pour les laboratoires.",
+    description: "رائد في تقنيات الطحن السني وحلول الزراعة المتقدمة للمخابر.",
   },
   {
     name: "Sirio",
     icon: "/images/Sirio.png",
-    description: "Concepteur d'équipements de laboratoire dentaire professionnels, incluant fours céramiques et polymériseurs.",
+    description: "مصمم لمعدات مخابر الأسنان الاحترافية، بما في ذلك أفران السيراميك وأجهزة البلمرة.",
   },
   {
     name: "Soco",
     icon: "/images/Soco.png",
-    description: "Expert en capteurs intra-oraux numériques pour une imagerie dentaire rapide et fiable.",
+    description: "خبير في الحساسات الرقمية داخل الفم لتصوير سني سريع وموثوق.",
   },
   {
     name: "coxo",
     icon: "/images/coxo.png",
-    description: "Pionnier des matériaux dentaires haute performance pour des restaurations esthétiques et durables.",
+    description: "رائد في مواد الأسنان عالية الأداء لترميمات جمالية ومتينة.",
   }
 ];
 
 export const Integrations = () => {
   return (
-    <section className="py-24 overflow-hidden ">
+    <section className="py-24 overflow-hidden " dir="rtl">
       <div className="container">
         <div className="grid lg:grid-cols-2 items-center lg:gap-16">
           <div>
-            <Tag>Nos Partenaires</Tag>
+            <Tag>شركاؤنا</Tag>
             <h2 className="text-5xl lg:text-6xl text-gray-800 font-medium mt-6">
-              Partenariats avec les <span style={{ color: '#6C3C74' }}> leaders mondiaux </span> 
-              en équipement dentaire
+              شراكات مع <span style={{ color: '#6C3C74' }}>رواد عالميين</span>
+              في تجهيزات طب الأسنان
             </h2>
             <p className="text-lg text-gray-600 mt-6 max-w-lg">
-              Chez DentalOuest, nous sélectionnons rigoureusement nos fournisseurs pour vous proposer 
-              uniquement des équipements certifiés, performants et adaptés aux exigences 
-              des cabinets dentaires modernes.
+              نختار شركاءنا بعناية لنقدم تجهيزات معتمدة وعالية الأداء، مناسبة لاحتياجات عيادات الأسنان الحديثة.
             </p>
             <p className="text-lg text-gray-600 mt-4 max-w-lg">
-              Notre expertise technique nous permet de vous conseiller dans le choix 
-              des solutions les plus adaptées à votre pratique.
+              خبرتنا التقنية تساعدك على اختيار الحلول الأنسب لطبيعة عملك.
             </p>
           </div>
 

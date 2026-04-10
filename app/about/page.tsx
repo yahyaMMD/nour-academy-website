@@ -30,8 +30,8 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <FadeIn>
-                <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">عن المدرسة</p>
-                <h1 className="mb-5 font-[var(--font-brand-heading)] text-4xl font-extrabold leading-[1.3] text-[var(--brand-ink)] md:text-6xl">
+                <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">عن المنصة</p>
+                <h1 className="mb-5 font-[var(--font-brand-heading)] text-4xl font-extrabold leading-[1.28] text-[var(--brand-ink)] md:text-6xl md:leading-[1.34] lg:leading-[1.4]">
                   {brand.nameAr}
                   <span className="brand-gradient-text"> ليست مجرد مكان للدراسة </span>
                   بل بيئة تدفع الطالب ليؤمن بقدرته على النجاح.
@@ -68,7 +68,7 @@ export default function AboutPage() {
               </div>
               <div className="mt-6 grid gap-4">
                 <div className="rounded-[1.5rem] bg-[var(--brand-primary-soft)] p-5">
-                  <p className="mb-2 text-sm font-semibold text-[var(--brand-primary)]">فلسفة المدرسة</p>
+                  <p className="mb-2 text-sm font-semibold text-[var(--brand-primary)]">فلسفة المنصة</p>
                   <p className="text-base leading-8 text-[var(--brand-ink)]">
                     نريد للطالب أن يدخل وهو متردد، ثم يخرج وهو أكثر فهما وهدوءا وثقة بما يستطيع تحقيقه.
                   </p>
@@ -118,7 +118,7 @@ export default function AboutPage() {
                 <div key={item} className="rounded-[1.5rem] bg-white/10 p-5">
                   <p className="font-bold text-[var(--brand-highlight)]">{item}</p>
                   <p className="mt-2 text-sm leading-7 text-white/80">
-                    نفس الروح الواضحة والمحترمة التي تجعل الطالب يشعر بالانتماء والثقة أينما تفاعل مع المدرسة.
+                    نفس الروح الواضحة والمحترمة التي تجعل الطالب يشعر بالانتماء والثقة أينما تفاعل مع المنصة.
                   </p>
                 </div>
               ))}

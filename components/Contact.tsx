@@ -53,7 +53,7 @@ const Contact = () => {
           className="max-w-2xl"
         >
           <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">تواصل معنا</p>
-          <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)] md:text-5xl">
+          <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.34] text-[var(--brand-ink)] md:text-5xl md:leading-[1.32]">
             خذ الخطوة الأولى نحو
             <span className="text-[var(--brand-accent)]"> مستوى أفضل</span>
           </h2>
@@ -96,7 +96,7 @@ const Contact = () => {
             نحن لا نعدك بدروس فقط، بل بتجربة تساعدك على التقدم فعلا
           </h3>
           <p className="mb-8 text-base leading-8 text-[var(--brand-muted)]">
-            سواء كنت طالبا يريد تحسين مستواه أو ولي أمر يبحث عن بيئة موثوقة ومحفزة، ستجد في مدرسة النور
+            سواء كنت طالبا يريد تحسين مستواه أو ولي أمر يبحث عن بيئة موثوقة ومحفزة، ستجد في منصة النور
             وضوحا في التواصل وجدية في المتابعة وطموحا في النتائج.
           </p>
 

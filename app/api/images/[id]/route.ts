@@ -45,7 +45,7 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { title, description, url, alt, order, isActive } = body;
+    const { title, description, url, alt, order, isActive, courseId } = body;
 
     const image = await prisma.image.update({
       where: { id },
@@ -54,6 +54,7 @@ export async function PATCH(
         ...(description !== undefined && { description }),
         ...(url && { url }),
         ...(alt !== undefined && { alt }),
+        ...(courseId !== undefined && { courseId: courseId || null }),
         ...(order !== undefined && { order }),
         ...(isActive !== undefined && { isActive }),
       },

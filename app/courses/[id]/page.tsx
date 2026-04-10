@@ -7,12 +7,14 @@ import { format } from 'date-fns';
 import { arDZ } from 'date-fns/locale';
 import { toast } from 'sonner';
 import ImageGallery from '@/components/CourseImagesSlider';
+import { getCourseImageAspectClass } from '@/lib/course-image';
 
 type Course = {
   id: string;
   title: string;
   description: string;
   image?: string | null;
+  imageAspect?: string | null;
   instructor: string;
   category: { name: string };
   date: string;
@@ -160,13 +162,13 @@ export default function CoursePage() {
         <div className="grid gap-10 lg:grid-cols-5">
           <div className="space-y-8 lg:col-span-3">
             <div className="overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-[rgba(45,131,173,0.08)]">
-              <div className="relative w-full bg-[var(--brand-primary-soft)]">
+              <div className={`relative w-full bg-[var(--brand-primary-soft)] ${getCourseImageAspectClass(course.imageAspect)}`}>
                 <Image
                   src={course.image || '/images/logo.png'}
                   alt={course.title}
                   width={1200}
                   height={720}
-                  className="h-auto w-full object-contain"
+                  className="h-full w-full object-cover"
                   priority
                   unoptimized
                 />
@@ -250,7 +252,7 @@ export default function CoursePage() {
                   <li>شرح واضح يساعدك على فهم الدروس بثقة.</li>
                   <li>تنظيم أفضل لمسارك الدراسي وخطواتك القادمة.</li>
                   <li>تجربة مريحة تشجعك على الاستمرار والتحسن.</li>
-                  <li>بيئة تعليمية تحمل نفس روح مدرسة النور في الوضوح والتحفيز.</li>
+                  <li>بيئة تعليمية تحمل نفس روح منصة النور في الوضوح والتحفيز.</li>
                 </ul>
               </div>
             </div>
@@ -258,7 +260,7 @@ export default function CoursePage() {
         </div>
       </div>
 
-      <ImageGallery />
+      {course && <ImageGallery courseId={course.id} />}
     </div>
   );
 }

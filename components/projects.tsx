@@ -7,12 +7,14 @@ import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import { Container } from './Container';
 import { FadeIn } from './FadeIn';
+import { getCourseImageAspectClass } from '@/lib/course-image';
 
 type Course = {
   id: string;
   title: string;
   description: string;
   image?: string | null;
+  imageAspect?: string | null;
   category: { name: string };
   instructor: string;
   date: string;
@@ -132,7 +134,7 @@ const CoursesSection = () => {
                   viewport={{ once: true }}
                   className="grid overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-[rgba(45,131,173,0.08)] lg:grid-cols-[1fr_1.05fr]"
                 >
-                  <div className="relative min-h-[320px]">
+                  <div className={`relative w-full bg-[var(--brand-primary-soft)] ${getCourseImageAspectClass(course.imageAspect)}`}>
                     <Image
                       src={course.image || fallbackImage}
                       alt={course.title}
@@ -194,7 +196,7 @@ const CoursesSection = () => {
               >
                 <Link href={`/courses/${course.id}`} className="group block h-full">
                   <article className="flex h-full flex-col overflow-hidden rounded-[2rem] bg-white shadow-lg ring-1 ring-[rgba(45,131,173,0.08)] transition hover:-translate-y-1 hover:shadow-xl">
-                    <div className="relative h-72 w-full overflow-hidden">
+                    <div className={`relative w-full overflow-hidden bg-[var(--brand-primary-soft)] ${getCourseImageAspectClass(course.imageAspect)}`}>
                       <Image
                         src={course.image || fallbackImage}
                         alt={course.title}
