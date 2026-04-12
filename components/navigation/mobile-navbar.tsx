@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { NAV_LINKS } from "@/utils";
-import BrandLogo from "@/components/BrandLogo";
 
 type MobileNavbarProps = {
   onMenuStateChange?: (open: boolean) => void;
