@@ -43,7 +43,7 @@ const CoursesSection = () => {
         setCourses(data);
       } catch (error) {
         console.error(error);
-        toast.error('تعذر تحميل البرامج حاليا');
+        toast.error('تعذر تحميل البرامج حاليًا');
         setCourses([]);
       } finally {
         setLoading(false);
@@ -93,8 +93,7 @@ const CoursesSection = () => {
               من اليوم
             </h2>
             <p className="mx-auto max-w-3xl text-lg leading-8 text-[var(--brand-muted)]">
-              برامج صممت لتمنح الطالب فهما أقوى، حضورا أفضل، ونتائج تبني ثقته بنفسه. ابدأ بالمسار
-              الأنسب لك ثم دع التقدم يتكلم عنك.
+              برامج صممت لتمنح الطالب فهمًا أقوى، وحضورًا أفضل، ونتائج تبني ثقته بنفسه. ابدأ بالمسار الأنسب لك ثم دع التقدم يتكلم عنك.
             </p>
           </FadeIn>
         </div>
@@ -142,7 +141,7 @@ const CoursesSection = () => {
                       className="object-cover"
                     />
                     <div className="absolute inset-x-4 top-4 inline-flex w-fit rounded-full bg-[var(--brand-accent)] px-4 py-2 text-sm font-bold text-white">
-                      الأكثر طلبا
+                      الأكثر طلبًا
                     </div>
                   </div>
 
@@ -235,7 +234,7 @@ const CoursesSection = () => {
 
         {filteredCourses.length === 0 && (
           <div className="rounded-[2rem] bg-white p-10 text-center text-[var(--brand-muted)] shadow-sm ring-1 ring-[rgba(45,131,173,0.08)]">
-            لا توجد برامج متاحة في هذا القسم حاليا.
+            لا توجد برامج متاحة في هذا القسم حاليًا.
           </div>
         )}
       </Container>

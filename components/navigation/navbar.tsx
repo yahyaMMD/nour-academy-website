@@ -79,7 +79,7 @@ const Navbar = () => {
             )}
           >
             <FaCalendarAlt className="mr-2 text-sm" />
-            ابدأ التعلم
+            ابدأ التعلّم
           </Link>
 
           {status === "authenticated" ? (

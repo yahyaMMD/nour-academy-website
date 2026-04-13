@@ -7,7 +7,7 @@ import { Container } from "./Container";
 const cards = [
   {
     title: "تعلم مرن وواضح",
-    text: "الطالب يعرف ماذا يدرس، لماذا يدرسه، وكيف يتقدم فيه دون شعور بالتشتت أو الضياع.",
+    text: "الطالب يعرف ماذا يدرس، ولماذا يدرسه، وكيف يتقدم فيه دون شعور بالتشتت أو الضياع.",
     color: "bg-[var(--brand-primary-soft)]",
   },
   {
@@ -17,7 +17,7 @@ const cards = [
   },
   {
     title: "رحلة قابلة للنمو",
-    text: "سواء بدأ الطالب من الصفر أو كان يطمح إلى مستوى أعلى، التجربة قابلة للتوسع معه خطوة بعد خطوة.",
+    text: "سواء بدأ الطالب من الصفر أو كان يطمح إلى مستوى أعلى، فالتجربة قابلة للتوسع معه خطوة بعد خطوة.",
     color: "bg-[var(--brand-highlight-soft)]",
   },
 ];
@@ -34,14 +34,13 @@ const FeedbackSection = () => {
             viewport={{ once: true }}
           >
             <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">لماذا هذه التجربة مختلفة؟</p>
-            <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.34] text-[var(--brand-ink)] md:text-5xl md:leading-[1.32]">
+            <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.26] text-[var(--brand-ink)] md:text-5xl md:leading-[1.24]">
               منصة تجعل الطالب
               <span className="text-[var(--brand-accent)]"> يريد أن يتعلم </span>
               لا أن ينجز المطلوب فقط
             </h2>
             <p className="mb-8 text-lg leading-8 text-[var(--brand-muted)]">
-              حين يشعر الطالب أن المكان يفهمه ويخاطبه بطريقة محترمة وقريبة، يتحول الحضور من واجب ثقيل إلى خطوة
-              طبيعية نحو نتيجة أفضل. هذا بالضبط ما نعمل عليه في منصة النور.
+              حين يشعر الطالب أن المكان يفهمه ويخاطبه بطريقة محترمة وقريبة، يتحول الحضور من واجب ثقيل إلى خطوة طبيعية نحو نتيجة أفضل. هذا بالضبط ما نعمل عليه في منصة النور.
             </p>
 
             <div className="flex flex-wrap gap-4">

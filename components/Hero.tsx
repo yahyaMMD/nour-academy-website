@@ -7,18 +7,18 @@ import { brand } from "@/lib/brand";
 
 const featureCards = [
   {
-    title: "شرح يفهمك فعلا",
-    text: "نحوّل الدروس إلى أفكار واضحة وخطوات سهلة حتى يشعر الطالب أنه قادر من أول حصة.",
+    title: "شرح يفهمك فعلًا",
+    text: "نحوّل الدروس إلى أفكار واضحة وخطوات سهلة حتى يشعر الطالب من أول حصة أنه قادر على الفهم والتقدم.",
     color: "bg-[var(--brand-highlight-soft)]",
   },
   {
     title: "متابعة تصنع الفرق",
-    text: "نعتمد على التدرج، التكرار الذكي، والتوجيه المستمر حتى يتحول التحسن إلى نتيجة ملموسة.",
+    text: "نعتمد على التدرج، والتكرار الذكي، والتوجيه المستمر حتى يتحول التحسن إلى نتيجة ملموسة.",
     color: "bg-[var(--brand-primary-soft)]",
   },
   {
     title: "جو يشجعك على النجاح",
-    text: "بيئة حديثة وقريبة من الطالب تمنحه الحافز والثقة ليحضر، يشارك، ويتقدم بثبات.",
+    text: "بيئة حديثة وقريبة من الطالب تمنحه الحافز والثقة ليحضر، ويشارك، ويتقدم بثبات.",
     color: "bg-[var(--brand-accent-soft)]",
   },
 ];
@@ -40,7 +40,7 @@ const Hero = () => {
             {brand.taglineAr}
           </div>
 
-          <h1 className="mb-5 font-[var(--font-brand-heading)] text-4xl font-extrabold leading-[1.24] text-[var(--brand-ink)] md:text-6xl md:leading-[1.32] lg:leading-[1.38]">
+          <h1 className="mb-5 font-[var(--font-brand-heading)] text-4xl font-extrabold leading-[1.2] text-[var(--brand-ink)] md:text-6xl md:leading-[1.24] lg:leading-[1.28]">
             هنا يبدأ
             <span className="brand-gradient-text"> التفوق الحقيقي </span>
             بخطوات واضحة وثقة أكبر.

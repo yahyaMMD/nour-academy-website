@@ -53,13 +53,12 @@ const Contact = () => {
           className="max-w-2xl"
         >
           <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">تواصل معنا</p>
-          <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.34] text-[var(--brand-ink)] md:text-5xl md:leading-[1.32]">
+          <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.26] text-[var(--brand-ink)] md:text-5xl md:leading-[1.24]">
             خذ الخطوة الأولى نحو
             <span className="text-[var(--brand-accent)]"> مستوى أفضل</span>
           </h2>
           <p className="mb-8 text-lg leading-8 text-[var(--brand-muted)]">
-            إذا كنت تبحث عن مكان يساعدك على الفهم، ينظم طريقك، ويمنحك دفعة حقيقية نحو التفوق، فنحن هنا
-            لنبدأ معك من النقطة المناسبة.
+            إذا كنت تبحث عن مكان يساعدك على الفهم، وينظم طريقك، ويمنحك دفعة حقيقية نحو التفوق، فنحن هنا لنبدأ معك من النقطة المناسبة.
           </p>
 
           <div className="space-y-4">
@@ -90,14 +89,13 @@ const Contact = () => {
           className="brand-panel rounded-[2rem] p-8"
         >
           <div className="mb-6 inline-flex items-center rounded-full bg-[var(--brand-highlight-soft)] px-4 py-2 text-sm font-bold text-[var(--brand-ink)]">
-            بداية جديدة للتعلم
+            بداية جديدة للتعلّم
           </div>
           <h3 className="mb-4 font-[var(--font-brand-heading)] text-2xl font-bold text-[var(--brand-ink)]">
-            نحن لا نعدك بدروس فقط، بل بتجربة تساعدك على التقدم فعلا
+            نحن لا نعدك بدروس فقط، بل بتجربة تساعدك على التقدم فعلًا
           </h3>
           <p className="mb-8 text-base leading-8 text-[var(--brand-muted)]">
-            سواء كنت طالبا يريد تحسين مستواه أو ولي أمر يبحث عن بيئة موثوقة ومحفزة، ستجد في منصة النور
-            وضوحا في التواصل وجدية في المتابعة وطموحا في النتائج.
+            سواء كنت طالبًا يريد تحسين مستواه أو ولي أمر يبحث عن بيئة موثوقة ومحفزة، ستجد في منصة النور وضوحًا في التواصل وجدية في المتابعة وطموحًا في النتائج.
           </p>
 
           <div className="space-y-5">

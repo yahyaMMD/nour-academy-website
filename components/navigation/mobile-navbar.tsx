@@ -37,7 +37,6 @@ const MobileNavbar = ({ onMenuStateChange }: MobileNavbarProps) => {
 
         <SheetContent className="w-screen border-l-0 bg-[var(--brand-surface)]">
           <div className="my-20">
-
             <Accordion type="single" collapsible className="w-full">
               {NAV_LINKS.map((link) => (
                 <AccordionItem key={link.title} value={link.title} className="border-b border-[rgba(45,131,173,0.1)]">
