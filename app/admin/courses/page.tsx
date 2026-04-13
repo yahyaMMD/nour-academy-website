@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -36,14 +36,14 @@ export default function AdminCoursesPage() {
         const response = await fetch('/api/courses?all=true');
 
         if (!response.ok) {
-          throw new Error('تعذر جلب الدورةs');
+          throw new Error('تعذر جلب الدورات');
         }
 
         const data = await response.json();
         setCourses(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching courses:', error);
-        toast.error('ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ø¯ÙˆØ±Ø§Øª.');
+        toast.error('تعذر تحميل الدورات.');
         setCourses([]);
       } finally {
         setLoading(false);
@@ -67,10 +67,10 @@ export default function AdminCoursesPage() {
       }
 
       setCourses(courses.filter(course => course.id !== id));
-      toast.success('ØªÙ… Ø­Ø°Ù Ø§Ù„Ø¯ÙˆØ±Ø© Ø¨Ù†Ø¬Ø§Ø­');
+      toast.success('تم حذف الدورة بنجاح');
     } catch (error) {
       console.error('Error deleting course:', error);
-      toast.error('ØªØ¹Ø°Ø± Ø­Ø°Ù Ø§Ù„Ø¯ÙˆØ±Ø©.');
+      toast.error('تعذر حذف الدورة.');
     } finally {
       setDeletingId(null);
     }
@@ -96,10 +96,10 @@ export default function AdminCoursesPage() {
       setCourses(courses.map(course =>
         course.id === id ? { ...course, [field]: !currentStatus } : course
       ));
-      toast.success('ØªÙ… ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„Ø¯ÙˆØ±Ø©');
+      toast.success('تم تحديث حالة الدورة');
     } catch (error) {
       console.error('Error updating course:', error);
-      toast.error('ØªØ¹Ø°Ø± ØªØ­Ø¯ÙŠØ« Ø­Ø§Ù„Ø© Ø§Ù„Ø¯ÙˆØ±Ø©.');
+      toast.error('تعذر تحديث حالة الدورة.');
     } finally {
       setUpdatingId(null);
     }
@@ -108,7 +108,7 @@ export default function AdminCoursesPage() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
+        <div className="mb-8 flex items-center justify-between">
           <Skeleton className="h-9 w-64" />
           <Skeleton className="h-10 w-40" />
         </div>
@@ -130,30 +130,29 @@ export default function AdminCoursesPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[var(--brand-ink)]">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¯ÙˆØ±Ø§Øª</h1>
-        <div className="flex flex-col md:flex-row gap-4">
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="text-3xl font-bold text-[var(--brand-ink)]">إدارة الدورات</h1>
+        <div className="flex flex-col gap-4 md:flex-row">
           <Link href="/admin/categories/new">
-            <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
+            <Button className="bg-[var(--brand-primary)] text-white hover:bg-[#236d90]">
               <Plus className="mr-2 h-4 w-4" />
-              Ø¥Ø¶Ø§ÙØ© ÙØ¦Ø©
+              إضافة فئة
             </Button>
           </Link>
           <Link href="/admin/courses/new">
-            <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
+            <Button className="bg-[var(--brand-primary)] text-white hover:bg-[#236d90]">
               <Plus className="mr-2 h-4 w-4" />
-              Ø¥Ø¶Ø§ÙØ© Ø¯ÙˆØ±Ø©
+              إضافة دورة
             </Button>
           </Link>
           <Link href="/admin/course-images">
-            <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
+            <Button className="bg-[var(--brand-primary)] text-white hover:bg-[#236d90]">
               <Plus className="mr-2 h-4 w-4" />
-              Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØµÙˆØ±
+              إدارة الصور
             </Button>
           </Link>
           <Link href="/admin/registration-contact">
-            <Button className="bg-[var(--brand-primary)] hover:bg-[#236d90] text-white">
+            <Button className="bg-[var(--brand-primary)] text-white hover:bg-[#236d90]">
               <Plus className="mr-2 h-4 w-4" />
               إعدادات تواصل التسجيل
             </Button>
@@ -163,19 +162,19 @@ export default function AdminCoursesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>ÙƒÙ„ Ø§Ù„Ø¯ÙˆØ±Ø§Øª</CardTitle>
+          <CardTitle>كل الدورات</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Ø§Ù„Ø¹Ù†ÙˆØ§Ù†</TableHead>
-                <TableHead>Ø§Ù„Ù…Ø¯Ø±Ø³</TableHead>
-                <TableHead>Ø§Ù„ØªØ§Ø±ÙŠØ®</TableHead>
-                <TableHead>Ø§Ù„Ù…ÙƒØ§Ù†</TableHead>
-                <TableHead>Ø§Ù„Ø³Ø¹Ø±</TableHead>
-                <TableHead>Ø§Ù„Ø­Ø§Ù„Ø©</TableHead>
-                <TableHead className="text-right">Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</TableHead>
+                <TableHead>العنوان</TableHead>
+                <TableHead>المدرس</TableHead>
+                <TableHead>التاريخ</TableHead>
+                <TableHead>المكان</TableHead>
+                <TableHead>السعر</TableHead>
+                <TableHead>الحالة</TableHead>
+                <TableHead className="text-right">إجراءات</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -212,32 +211,32 @@ export default function AdminCoursesPage() {
                       <div className="flex gap-2">
                         <Badge
                           variant={course.featured ? 'default' : 'secondary'}
-                          className={`cursor-pointer hover:opacity-80 transition-opacity${updatingId === course.id ? ' opacity-60 pointer-events-none' : ''}`}
+                          className={`cursor-pointer transition-opacity hover:opacity-80${updatingId === course.id ? ' pointer-events-none opacity-60' : ''}`}
                           onClick={() => {
                             if (updatingId !== course.id) {
                               toggleStatus(course.id, 'featured', course.featured);
                             }
                           }}
                         >
-                          {course.featured ? 'Ù…Ù…ÙŠØ²Ø©' : 'Ø¹Ø§Ø¯ÙŠØ©'}
+                          {course.featured ? 'مميزة' : 'عادية'}
                           {updatingId === course.id && <span className="ml-2">...</span>}
                         </Badge>
                         <Badge
                           variant={course.inFront ? 'default' : 'secondary'}
-                          className={`cursor-pointer hover:opacity-80 transition-opacity${updatingId === course.id ? ' opacity-60 pointer-events-none' : ''}`}
+                          className={`cursor-pointer transition-opacity hover:opacity-80${updatingId === course.id ? ' pointer-events-none opacity-60' : ''}`}
                           onClick={() => {
                             if (updatingId !== course.id) {
                               toggleStatus(course.id, 'inFront', course.inFront);
                             }
                           }}
                         >
-                          {course.inFront ? 'ØªØ¸Ù‡Ø± ÙÙŠ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©' : 'Ù…Ø®ÙÙŠØ© Ù…Ù† Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©'}
+                          {course.inFront ? 'تظهر في الرئيسية' : 'مخفية من الرئيسية'}
                           {updatingId === course.id && <span className="ml-2">...</span>}
                         </Badge>
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
-                      <div className="flex gap-2 justify-end">
+                      <div className="flex justify-end gap-2">
                         <Link href={`/admin/courses/${course.id}/`}>
                           <Button variant="outline" size="sm">
                             <Edit className="h-4 w-4" />
@@ -251,7 +250,7 @@ export default function AdminCoursesPage() {
                         >
                           {deletingId === course.id ? (
                             <span className="flex items-center">
-                              <span className="animate-spin mr-2">â†»</span>
+                              <span className="mr-2 animate-spin">↻</span>
                               جارٍ الحذف...
                             </span>
                           ) : (
@@ -269,13 +268,13 @@ export default function AdminCoursesPage() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-8">
+                  <TableCell colSpan={7} className="py-8 text-center">
                     <div className="flex flex-col items-center gap-4">
-                      <p className="text-gray-500">Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¯ÙˆØ±Ø§Øª Ø­Ø§Ù„ÙŠØ§Ù‹</p>
+                      <p className="text-gray-500">لا توجد دورات حاليًا</p>
                       <Link href="/admin/courses/new">
                         <Button variant="outline">
                           <Plus className="mr-2 h-4 w-4" />
-                          Ø¥Ù†Ø´Ø§Ø¡ Ø¯ÙˆØ±Ø© Ø¬Ø¯ÙŠØ¯Ø©
+                          إنشاء دورة جديدة
                         </Button>
                       </Link>
                     </div>
