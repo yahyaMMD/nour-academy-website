@@ -44,8 +44,11 @@ export default function CreateCategoryPage() {
     }
   };
 
+  const inputClass =
+    'mt-1 block w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-[var(--brand-ink)] outline-none transition focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary-soft)]';
+
   return (
-    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
+    <div className="min-h-screen bg-[var(--brand-surface)] py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
       <div className="max-w-md mx-auto">
         <div className="flex justify-start mb-4">
           <button
@@ -58,10 +61,10 @@ export default function CreateCategoryPage() {
         </div>
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[var(--brand-ink)]">إنشاء مادة جديدة</h1>
+          <h1 className="font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)]">إنشاء مادة جديدة</h1>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6">
+        <div className="brand-panel rounded-[2rem] p-6 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-lg font-medium text-[var(--brand-ink)]">
@@ -73,7 +76,7 @@ export default function CreateCategoryPage() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
+                className={inputClass}
                 required
               />
             </div>
@@ -88,7 +91,7 @@ export default function CreateCategoryPage() {
                 rows={3}
                 value={formData.description}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
+                className={`${inputClass} resize-none`}
               />
             </div>
 
@@ -96,7 +99,7 @@ export default function CreateCategoryPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`py-3 px-6 rounded-xl text-white font-bold text-lg transition-all ${
+                className={`rounded-2xl px-6 py-3 text-lg font-bold text-white transition-all ${
                   isSubmitting ? 'bg-[#236d90]' : 'bg-[var(--brand-primary)] hover:bg-[#236d90] shadow-lg hover:shadow-xl'
                 }`}
               >

@@ -59,23 +59,23 @@ function AdminPostsListAr() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
           <div>
-            <h1 className="text-3xl font-bold text-[var(--brand-ink)]">مقالاتك</h1>
+            <h1 className="font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)]">مقالاتك</h1>
             <p className="text-[var(--brand-muted)] mt-2">إدارة كل المحتوى المنشور</p>
           </div>
 
           <Link
             href="/admin/posts/create"
-            className="flex items-center px-6 py-3 bg-[var(--brand-primary)] text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:ring-offset-2 transition-colors"
+            className="inline-flex items-center rounded-2xl bg-[var(--brand-primary)] px-6 py-3 font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#236d90]"
           >
             <FiPlus className="ml-2" />
             مقال جديد
           </Link>
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 bg-white p-4 rounded-lg shadow-sm">
+        <div className="brand-panel mb-8 flex flex-col items-start justify-between gap-4 rounded-[2rem] p-5 sm:flex-row sm:items-center">
           <div className="relative w-full sm:w-96">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-gray-400" />
+              <FiSearch className="text-[var(--brand-muted)]" />
             </div>
             <form action="/admin/posts" method="get" className="w-full">
               <input
@@ -83,7 +83,7 @@ function AdminPostsListAr() {
                 name="search"
                 placeholder="ابحث في المقالات..."
                 defaultValue={searchQuery}
-                className="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
+                className="block w-full rounded-2xl border border-slate-200 bg-white py-3 pl-10 pr-4 text-[var(--brand-ink)] outline-none transition focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary-soft)]"
               />
               <input type="hidden" name="sort" value={sortOrder === 'asc' ? 'oldest' : 'newest'} />
             </form>
@@ -92,26 +92,26 @@ function AdminPostsListAr() {
           <div className="flex gap-2">
             <Link
               href={`/admin/posts?search=${searchQuery}&sort=newest`}
-              className={`flex items-center px-4 py-2 rounded-lg border ${sortOrder === 'desc' ? 'bg-[var(--brand-primary-soft)] border-[var(--brand-primary)] text-[var(--brand-primary)]' : 'bg-white border-gray-300 text-[var(--brand-ink)]'}`}
+              className={`flex items-center rounded-2xl border px-4 py-2 font-semibold ${sortOrder === 'desc' ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'border-slate-200 bg-white text-[var(--brand-ink)] hover:bg-[var(--brand-primary-soft)]'}`}
             >
               الأحدث
             </Link>
             <Link
               href={`/admin/posts?search=${searchQuery}&sort=oldest`}
-              className={`flex items-center px-4 py-2 rounded-lg border ${sortOrder === 'asc' ? 'bg-[var(--brand-primary-soft)] border-[var(--brand-primary)] text-[var(--brand-primary)]' : 'bg-white border-gray-300 text-[var(--brand-ink)]'}`}
+              className={`flex items-center rounded-2xl border px-4 py-2 font-semibold ${sortOrder === 'asc' ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'border-slate-200 bg-white text-[var(--brand-ink)] hover:bg-[var(--brand-primary-soft)]'}`}
             >
               الأقدم
             </Link>
           </div>
         </div>
 
-        <div className="bg-white shadow overflow-hidden rounded-lg">
+        <div className="overflow-hidden rounded-[2rem] bg-white shadow-lg ring-1 ring-[rgba(45,131,173,0.08)]">
           {posts.length > 0 ? (
             <div className="divide-y divide-gray-200">
               {posts.map((post, index) => (
                 <div key={post.id || `post-${index}`} className="p-4 hover:bg-[var(--brand-surface)] transition-colors">
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
-                    <div className="w-full md:w-48 h-32 bg-[var(--brand-primary-soft)] rounded-lg overflow-hidden shrink-0 relative">
+                    <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-[1.25rem] bg-[var(--brand-primary-soft)] md:w-48">
                       {post.imageUrl ? (
                         <Image src={post.imageUrl} alt={post.title} fill unoptimized className="object-cover" />
                       ) : post.videoUrl ? (
@@ -119,8 +119,8 @@ function AdminPostsListAr() {
                           <FiVideo className="text-white text-2xl" />
                         </div>
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                          <FiImage className="text-gray-500 text-2xl" />
+                        <div className="w-full h-full flex items-center justify-center bg-[var(--brand-primary-soft)]">
+                          <FiImage className="text-[var(--brand-muted)] text-2xl" />
                         </div>
                       )}
                     </div>
@@ -130,7 +130,7 @@ function AdminPostsListAr() {
                         <span className="text-xs font-medium px-2 py-1 rounded bg-[var(--brand-primary-soft)] text-[var(--brand-muted)]">
                           {post.imageUrl ? 'صورة' : post.videoUrl ? 'فيديو' : 'نص'}
                         </span>
-                        <time dateTime={new Date(post.createdAt).toISOString()} className="text-xs text-gray-500">
+                        <time dateTime={new Date(post.createdAt).toISOString()} className="text-xs text-[var(--brand-muted)]">
                           {formatDate(new Date(post.createdAt))}
                         </time>
                       </div>
@@ -140,7 +140,7 @@ function AdminPostsListAr() {
 
                     <Link
                       href={`/admin/posts/${post.id}/`}
-                      className="flex items-center justify-center p-2 text-[var(--brand-ink)] hover:text-[var(--brand-primary)] hover:bg-[var(--brand-primary-soft)] rounded-lg transition-colors shrink-0"
+                      className="flex shrink-0 items-center justify-center rounded-2xl p-2 text-[var(--brand-ink)] transition-colors hover:bg-[var(--brand-primary-soft)] hover:text-[var(--brand-primary)]"
                       title="تعديل المقال"
                     >
                       <FiEdit2 className="text-lg ml-2" />
@@ -152,16 +152,16 @@ function AdminPostsListAr() {
             </div>
           ) : (
             <div className="text-center py-16">
-              <div className="mx-auto h-24 w-24 text-gray-400 mb-4">
+              <div className="mx-auto mb-4 h-24 w-24 text-[var(--brand-muted)]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-[var(--brand-ink)] mb-1">{searchQuery ? 'لا توجد مقالات مطابقة' : 'لا توجد مقالات بعد'}</h3>
-              <p className="text-gray-500 max-w-md mx-auto mb-6">{searchQuery ? 'جرّب عبارة بحث أخرى' : 'أنشئ أول مقال للبدء'}</p>
+              <p className="mx-auto mb-6 max-w-md text-[var(--brand-muted)]">{searchQuery ? 'جرّب عبارة بحث أخرى' : 'أنشئ أول مقال للبدء'}</p>
               <Link
                 href="/admin/posts/create"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[var(--brand-primary-soft)] hover:bg-[var(--brand-primary-soft)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--brand-primary)]"
+                className="inline-flex items-center rounded-2xl bg-[var(--brand-primary)] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#236d90]"
               >
                 إنشاء مقال جديد
               </Link>

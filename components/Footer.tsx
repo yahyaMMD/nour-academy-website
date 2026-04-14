@@ -89,7 +89,6 @@ const Footer = () => {
                   <FaPhone className="text-[var(--brand-highlight)]" />
                   {brand.phoneDisplay}
                 </a>
-                <p className="leading-7">{brand.locationAr}</p>
               </div>
             </div>
 

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaEnvelope, FaLocationDot, FaPhone, FaWhatsapp } from "react-icons/fa6";
+import { FaEnvelope, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import { brand } from "@/lib/brand";
 
@@ -53,7 +53,7 @@ const Contact = () => {
           className="max-w-2xl"
         >
           <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">تواصل معنا</p>
-          <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.26] text-[var(--brand-ink)] md:text-5xl md:leading-[1.24]">
+          <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.4] text-[var(--brand-ink)] md:text-5xl md:leading-[1.36]">
             خذ الخطوة الأولى نحو
             <span className="text-[var(--brand-accent)]"> مستوى أفضل</span>
           </h2>
@@ -99,13 +99,6 @@ const Contact = () => {
           </p>
 
           <div className="space-y-5">
-            <div className="rounded-[1.5rem] bg-white p-5 shadow-sm ring-1 ring-[rgba(45,131,173,0.08)]">
-              <div className="mb-2 flex items-center gap-3">
-                <FaLocationDot className="text-[var(--brand-accent)]" />
-                <p className="font-semibold text-[var(--brand-ink)]">الموقع</p>
-              </div>
-              <p className="text-[var(--brand-muted)]">{brand.locationAr}</p>
-            </div>
             <div className="rounded-[1.5rem] bg-[var(--brand-ink)] p-6 text-white shadow-sm">
               <p className="mb-3 text-sm font-semibold text-[var(--brand-highlight)]">خطوة سريعة</p>
               <p className="text-base leading-8 text-white/85">

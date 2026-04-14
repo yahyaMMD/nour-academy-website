@@ -13,7 +13,6 @@ const testimonials = [
     comment: "كنت أضيع وقتًا طويلًا في محاولة الفهم وحدي، لكن هنا أصبحت الدروس مرتبة وواضحة، وصرت أدخل الحصة وأنا مطمئنة بدل أن أكون متوترة.",
     author: "آية ب.",
     role: "طالبة ثانوي",
-    location: "الجزائر العاصمة",
     rating: 5,
     image: "https://ui-avatars.com/api/?name=Aya&background=2D83AD&color=fff",
     course: "تجربة تعلم مريحة",
@@ -23,7 +22,6 @@ const testimonials = [
     comment: "أكثر شيء أعجبني أن المنصة تجعل الطالب يشعر أن التقدم ممكن. الشرح مباشر، والتنظيم ممتاز، والتسجيل سهل جدًا.",
     author: "وليد ر.",
     role: "طالب متوسط",
-    location: "البليدة",
     rating: 5,
     image: "https://ui-avatars.com/api/?name=Walid&background=FF4343&color=fff",
     course: "مسار واضح للتطور",
@@ -33,7 +31,6 @@ const testimonials = [
     comment: "كولية أمر، أحببت هذا التوازن بين الجدية والقرب من الطالب. المنصة تعطي انطباعًا محترمًا، وفي نفس الوقت تشجع الطالب ولا ترهبه.",
     author: "أمينة ك.",
     role: "ولية أمر",
-    location: "وهران",
     rating: 5,
     image: "https://ui-avatars.com/api/?name=Amina&background=FFD740&color=16384B",
     course: "ثقة للأسرة والطالب",
@@ -80,9 +77,7 @@ const TestimonialCard = ({ testimonial, className }: { testimonial: (typeof test
           <h4 className="font-[var(--font-brand-heading)] text-lg font-bold text-[var(--brand-ink)]">
             {testimonial.author}
           </h4>
-          <p className="text-sm text-[var(--brand-muted)]">
-            {testimonial.role} • {testimonial.location}
-          </p>
+          <p className="text-sm text-[var(--brand-muted)]">{testimonial.role}</p>
           <p className="mt-1 text-sm font-semibold text-[var(--brand-accent)]">{testimonial.course}</p>
         </div>
       </div>

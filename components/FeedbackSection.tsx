@@ -34,7 +34,7 @@ const FeedbackSection = () => {
             viewport={{ once: true }}
           >
             <p className="mb-3 text-sm font-semibold text-[var(--brand-primary)]">لماذا هذه التجربة مختلفة؟</p>
-            <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.26] text-[var(--brand-ink)] md:text-5xl md:leading-[1.24]">
+            <h2 className="mb-5 font-[var(--font-brand-heading)] text-3xl font-extrabold leading-[1.42] text-[var(--brand-ink)] md:text-5xl md:leading-[1.38]">
               منصة تجعل الطالب
               <span className="text-[var(--brand-accent)]"> يريد أن يتعلم </span>
               لا أن ينجز المطلوب فقط

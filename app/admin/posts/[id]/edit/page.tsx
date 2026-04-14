@@ -82,6 +82,9 @@ export default function EditPostPage() {
     }
   };
 
+  const inputClass =
+    'w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-[var(--brand-ink)] outline-none transition focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary-soft)]';
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[var(--brand-surface)] flex items-center justify-center">
@@ -94,13 +97,13 @@ export default function EditPostPage() {
     <div className="min-h-screen bg-[var(--brand-surface)] py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
       <div className="max-w-3xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-[var(--brand-ink)]">تعديل المقال</h1>
-          <button onClick={() => router.push('/admin/posts')} className="flex items-center text-gray-500 hover:text-[var(--brand-ink)]">
+          <h1 className="font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)]">تعديل المقال</h1>
+          <button onClick={() => router.push('/admin/posts')} className="flex items-center text-[var(--brand-muted)] hover:text-[var(--brand-ink)]">
             <FiX className="ml-1" /> إلغاء
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white shadow rounded-lg p-6">
+        <form onSubmit={handleSubmit} className="brand-panel rounded-[2rem] p-6 shadow-lg">
           <div className="space-y-6">
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-[var(--brand-ink)] mb-1">
@@ -111,7 +114,7 @@ export default function EditPostPage() {
                 id="title"
                 value={post.title}
                 onChange={(e) => setPost({ ...post, title: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+                className={inputClass}
                 required
               />
             </div>
@@ -125,7 +128,7 @@ export default function EditPostPage() {
                 value={post.description}
                 onChange={(e) => setPost({ ...post, description: e.target.value })}
                 rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+                className={`${inputClass} resize-none`}
                 required
               />
             </div>
@@ -139,7 +142,7 @@ export default function EditPostPage() {
                 id="imageUrl"
                 value={post.imageUrl}
                 onChange={(e) => setPost({ ...post, imageUrl: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+                className={inputClass}
                 placeholder="https://example.com/image.jpg"
               />
             </div>
@@ -153,7 +156,7 @@ export default function EditPostPage() {
                 id="videoUrl"
                 value={post.videoUrl}
                 onChange={(e) => setPost({ ...post, videoUrl: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[var(--brand-primary)] focus:border-[var(--brand-primary)]"
+                className={inputClass}
                 placeholder="https://youtube.com/embed/video-id"
               />
             </div>
@@ -163,7 +166,7 @@ export default function EditPostPage() {
                 type="button"
                 onClick={() => setShowDeleteConfirm(true)}
                 disabled={isSubmitting}
-                className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                className="flex items-center rounded-2xl bg-[var(--brand-accent)] px-5 py-3 font-bold text-white transition hover:bg-[#ea2f2f] disabled:opacity-50"
               >
                 <FiTrash2 className="ml-2" />
                 حذف المقال
@@ -172,7 +175,7 @@ export default function EditPostPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex items-center px-4 py-2 bg-[var(--brand-primary)] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] disabled:opacity-50"
+                className="flex items-center rounded-2xl bg-[var(--brand-primary)] px-5 py-3 font-bold text-white transition hover:bg-[#236d90] disabled:opacity-50"
               >
                 <FiSave className="ml-2" />
                 {isSubmitting ? 'جارٍ الحفظ...' : 'حفظ التغييرات'}
@@ -182,15 +185,15 @@ export default function EditPostPage() {
         </form>
 
         {showDeleteConfirm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
-              <h3 className="text-lg font-medium text-[var(--brand-ink)] mb-4">تأكيد الحذف</h3>
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(11,30,41,0.45)] p-4">
+            <div className="brand-panel w-full max-w-md rounded-[2rem] p-6">
+              <h3 className="mb-4 font-[var(--font-brand-heading)] text-lg font-bold text-[var(--brand-ink)]">تأكيد الحذف</h3>
               <p className="text-[var(--brand-muted)] mb-6">هل أنت متأكد من حذف هذا المقال؟ لا يمكن التراجع عن هذا الإجراء.</p>
               <div className="flex justify-end gap-3">
-                <button onClick={() => setShowDeleteConfirm(false)} className="px-4 py-2 border border-gray-300 rounded-md text-[var(--brand-ink)] hover:bg-[var(--brand-surface)]">
+                <button onClick={() => setShowDeleteConfirm(false)} className="rounded-2xl border border-slate-200 px-4 py-2 text-[var(--brand-ink)] transition hover:bg-[var(--brand-primary-soft)]">
                   إلغاء
                 </button>
-                <button onClick={handleDelete} disabled={isSubmitting} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50">
+                <button onClick={handleDelete} disabled={isSubmitting} className="rounded-2xl bg-[var(--brand-accent)] px-4 py-2 font-bold text-white transition hover:bg-[#ea2f2f] disabled:opacity-50">
                   {isSubmitting ? 'جارٍ الحذف...' : 'حذف'}
                 </button>
               </div>

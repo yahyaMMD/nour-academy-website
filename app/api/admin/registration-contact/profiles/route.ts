@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       data: validation.data,
     });
 
-    return NextResponse.json({ success: true, data: profile, message: "?? ??? ?????? ?????" }, { status: 201 });
+    return NextResponse.json({ success: true, data: profile, message: "تم حفظ الملف الشخصي" }, { status: 201 });
   } catch (error) {
     console.error("[CONTACT_PROFILES_POST_ERROR]", error);
     return NextResponse.json({ success: false, error: "Failed to create profile" }, { status: 500 });

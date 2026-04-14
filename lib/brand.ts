@@ -15,7 +15,6 @@
   telegramHref: "#",
   androidAppHref: "https://play.google.com/store/apps",
   iosAppHref: "https://apps.apple.com",
-  locationAr: "الجزائر العاصمة، الجزائر",
   shortDescriptionAr:
     "منصة النور تقدم تجربة تعليمية حديثة تساعد الطالب على الفهم والتفوق بثقة، في بيئة واضحة ومحفزة وقريبة من الأسرة.",
 };

@@ -17,7 +17,7 @@ export async function DELETE(
       where: { id },
     });
 
-    return NextResponse.json({ success: true, message: "?? ??? ??????" });
+    return NextResponse.json({ success: true, message: "تم حذف الملف الشخصي" });
   } catch (error) {
     console.error("[CONTACT_PROFILE_DELETE_ERROR]", error);
     return NextResponse.json({ success: false, error: "Failed to delete profile" }, { status: 500 });

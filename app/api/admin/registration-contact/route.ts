@@ -59,7 +59,7 @@ export async function PUT(request: Request) {
       },
     });
 
-    return NextResponse.json({ success: true, data: settings, message: "?? ??? ????????? ?????" });
+    return NextResponse.json({ success: true, data: settings, message: "تم حفظ إعدادات التواصل" });
   } catch (error) {
     console.error("[REGISTRATION_CONTACT_PUT_ERROR]", error);
     return NextResponse.json({ success: false, error: "Failed to save settings" }, { status: 500 });

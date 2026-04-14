@@ -187,7 +187,6 @@ export default function CoursePage() {
               </h2>
               <div className="grid gap-6 md:grid-cols-2">
                 <InfoCard label="الأستاذ" value={course.instructor} />
-                <InfoCard label="المكان" value={course.location} />
                 <InfoCard label="التواصل" value={`${course.phone}${course.email ? ` • ${course.email}` : ''}`} />
                 <InfoCard label="التاريخ" value={format(new Date(course.date), 'PPPP', { locale: arDZ })} />
               </div>

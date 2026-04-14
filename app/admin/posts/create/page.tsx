@@ -56,18 +56,21 @@ export default function PageCreationArticle() {
     setMediaType(null);
   };
 
+  const inputClass =
+    'w-full rounded-2xl border border-slate-200 bg-white px-5 py-4 text-lg text-[var(--brand-ink)] outline-none transition focus:border-[var(--brand-primary)] focus:ring-2 focus:ring-[var(--brand-primary-soft)]';
+
   return (
-    <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
+    <div className="min-h-screen bg-[var(--brand-surface)] py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-[var(--brand-ink)] mb-4">إنشاء مقال جديد</h1>
+          <h1 className="mb-4 font-[var(--font-brand-heading)] text-4xl font-extrabold text-[var(--brand-ink)]">إنشاء مقال جديد</h1>
           <p className="text-xl text-[var(--brand-muted)]">شارك أفكارك ومحتواك بطريقة واضحة</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="brand-panel overflow-hidden rounded-[2rem] shadow-xl">
           <form onSubmit={handleSubmit} className="p-6 sm:p-10">
             <div className="mb-8">
-              <label htmlFor="title" className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+              <label htmlFor="title" className="mb-3 block text-lg font-medium text-[var(--brand-ink)]">
                 عنوان المقال
               </label>
               <input
@@ -75,14 +78,14 @@ export default function PageCreationArticle() {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
+                className={inputClass}
                 placeholder="اكتب عنوانا واضحا"
                 required
               />
             </div>
 
             <div className="mb-8">
-              <label htmlFor="description" className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
+              <label htmlFor="description" className="mb-3 block text-lg font-medium text-[var(--brand-ink)]">
                 المحتوى
               </label>
               <textarea
@@ -90,7 +93,7 @@ export default function PageCreationArticle() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={6}
-                className="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
+                className={`${inputClass} resize-none`}
                 placeholder="اكتب محتوى المقال..."
                 required
               />
@@ -99,11 +102,11 @@ export default function PageCreationArticle() {
             <div className="mb-8">
               <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">إضافة وسائط (اختياري)</label>
 
-              <div className="flex space-x-4 mb-6">
+              <div className="mb-6 flex space-x-4">
                 <button
                   type="button"
                   onClick={() => setMediaType('image')}
-                  className={`flex items-center justify-center px-6 py-3 rounded-xl border-2 ${mediaType === 'image' ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'border-gray-300 hover:border-gray-400'}`}
+                  className={`flex items-center justify-center rounded-2xl border px-6 py-3 font-semibold transition ${mediaType === 'image' ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'border-slate-200 bg-white text-[var(--brand-ink)] hover:bg-[var(--brand-primary-soft)]'}`}
                 >
                   <FiImage className="ml-2 text-xl" />
                   رابط صورة
@@ -111,7 +114,7 @@ export default function PageCreationArticle() {
                 <button
                   type="button"
                   onClick={() => setMediaType('video')}
-                  className={`flex items-center justify-center px-6 py-3 rounded-xl border-2 ${mediaType === 'video' ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'border-gray-300 hover:border-gray-400'}`}
+                  className={`flex items-center justify-center rounded-2xl border px-6 py-3 font-semibold transition ${mediaType === 'video' ? 'border-[var(--brand-primary)] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'border-slate-200 bg-white text-[var(--brand-ink)] hover:bg-[var(--brand-primary-soft)]'}`}
                 >
                   <FiVideo className="ml-2 text-xl" />
                   رابط فيديو
@@ -121,16 +124,16 @@ export default function PageCreationArticle() {
               {mediaType && (
                 <div className="relative">
                   <div className="flex items-center">
-                    <div className="absolute left-4 text-gray-400">{mediaType === 'image' ? <FiImage /> : <FiVideo />}</div>
+                    <div className="absolute left-4 text-[var(--brand-muted)]">{mediaType === 'image' ? <FiImage /> : <FiVideo />}</div>
                     <input
                       type="url"
                       value={mediaUrl}
                       onChange={(e) => handleMediaChange(e.target.value)}
-                      className="w-full pl-12 pr-10 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
+                      className={`${inputClass} pl-12 pr-10`}
                       placeholder={`ألصق رابط ${mediaType === 'image' ? 'الصورة' : 'الفيديو'} هنا...`}
                     />
                     {mediaUrl && (
-                      <button type="button" onClick={clearMedia} className="absolute right-4 text-gray-400 hover:text-[var(--brand-muted)]">
+                      <button type="button" onClick={clearMedia} className="absolute right-4 text-[var(--brand-muted)] hover:text-[var(--brand-ink)]">
                         <FiX />
                       </button>
                     )}
@@ -139,7 +142,7 @@ export default function PageCreationArticle() {
               )}
 
               {previewUrl && (
-                <div className="mt-6 rounded-xl overflow-hidden border border-gray-200">
+                <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-[rgba(45,131,173,0.12)]">
                   {mediaType === 'image' ? (
                     <div className="relative h-96 w-full">
                       <Image src={previewUrl} alt="معاينة" fill unoptimized className="object-contain" onError={() => setPreviewUrl('')} />
@@ -162,7 +165,7 @@ export default function PageCreationArticle() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 px-6 rounded-xl text-white font-bold text-lg transition-all ${isSubmitting ? 'bg-[var(--brand-primary)]' : 'bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)] shadow-lg hover:shadow-xl'}`}
+                className={`w-full rounded-2xl px-6 py-4 text-lg font-bold text-white transition-all ${isSubmitting ? 'bg-[var(--brand-primary)]' : 'bg-[var(--brand-primary)] shadow-lg hover:-translate-y-0.5 hover:bg-[#236d90] hover:shadow-xl'}`}
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">

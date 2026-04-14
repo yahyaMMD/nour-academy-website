@@ -67,12 +67,12 @@ export default function CategoriesPage() {
     return (
       <div className="min-h-screen bg-[var(--brand-surface)] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            <strong className="font-bold">خطأ: </strong>
+          <div className="rounded-[2rem] border border-[var(--brand-accent-soft)] bg-white px-6 py-5 text-[var(--brand-ink)] shadow-sm">
+            <strong className="font-bold text-[var(--brand-accent)]">خطأ: </strong>
             <span className="block sm:inline">{error}</span>
             <button
               onClick={() => window.location.reload()}
-              className="mt-2 bg-[var(--brand-primary)] text-white px-4 py-2 rounded hover:bg-[#236d90]"
+              className="mt-4 rounded-2xl bg-[var(--brand-primary)] px-5 py-3 font-bold text-white transition hover:bg-[#236d90]"
             >
               حاول مرة أخرى
             </button>
@@ -86,19 +86,19 @@ export default function CategoriesPage() {
     <div className="min-h-screen bg-[var(--brand-surface)] py-12 px-4 sm:px-6 lg:px-8" dir="rtl">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-[var(--brand-ink)]">المواد</h1>
+          <h1 className="font-[var(--font-brand-heading)] text-3xl font-extrabold text-[var(--brand-ink)]">المواد</h1>
           <Link
             href="/admin/categories/new"
-            className="inline-flex items-center px-4 py-2 bg-[var(--brand-primary)] text-white rounded-md hover:bg-[#236d90]"
+            className="inline-flex items-center rounded-2xl bg-[var(--brand-primary)] px-5 py-3 font-bold text-white transition hover:bg-[#236d90]"
           >
             <FiPlus className="ml-2" />
             إضافة مادة
           </Link>
         </div>
 
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div className="overflow-hidden rounded-[2rem] bg-white shadow-lg ring-1 ring-[rgba(45,131,173,0.08)]">
           {categories.length === 0 ? (
-            <div className="px-6 py-4 text-center text-gray-500">لا توجد مواد</div>
+            <div className="px-6 py-6 text-center text-[var(--brand-muted)]">لا توجد مواد</div>
           ) : (
             <ul className="divide-y divide-gray-200">
               {categories.map((category) => (
@@ -106,18 +106,18 @@ export default function CategoriesPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-lg font-medium text-[var(--brand-ink)]">{category.name}</h3>
-                      {category.description && <p className="text-gray-500 mt-1">{category.description}</p>}
+                      {category.description && <p className="mt-1 text-[var(--brand-muted)]">{category.description}</p>}
                     </div>
                     <div className="flex space-x-2">
                       <Link
                         href={`/admin/categories/${category.id}/`}
-                        className="text-[var(--brand-primary)] hover:text-[#236d90]"
+                        className="rounded-full p-2 text-[var(--brand-primary)] transition hover:bg-[var(--brand-primary-soft)] hover:text-[#236d90]"
                         aria-label="تعديل المادة"
                       >
                         <FiEdit className="h-5 w-5" />
                       </Link>
                       <button
-                        className="text-red-600 hover:text-red-900"
+                        className="rounded-full p-2 text-[var(--brand-accent)] transition hover:bg-[var(--brand-accent-soft)] hover:text-[#ea2f2f]"
                         onClick={() => handleDelete(category.id)}
                         aria-label="حذف المادة"
                       >

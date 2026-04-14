@@ -207,11 +207,10 @@ const CoursesSection = () => {
                       </div>
                     </div>
                     <div className="flex flex-1 flex-col p-6">
-                      <div className="mb-3 flex items-center justify-between text-sm">
+                      <div className="mb-3 text-sm">
                         <span className="text-[var(--brand-muted)]">
                           {new Date(course.date).toLocaleDateString('ar-DZ')}
                         </span>
-                        <span className="font-semibold text-[var(--brand-primary)]">{course.location}</span>
                       </div>
                       <h3 className="mb-3 font-[var(--font-brand-heading)] text-2xl font-bold text-[var(--brand-ink)] transition group-hover:text-[var(--brand-accent)]">
                         {course.title}
