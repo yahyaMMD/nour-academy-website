@@ -7,6 +7,7 @@ import { CTA } from "@/components/cta";
 import Testimonials from "@/components/testimonials";
 import About from "@/components/Services";
 import CoursesSection from "@/components/projects";
+import CourseImagesSection from "@/components/CourseImagesSection";
 import { SponsorsMarquee } from "@/components/Sponsor";
 import FeedbackSection from "@/components/FeedbackSection";
 import AppDownloadPromo from "@/components/AppDownloadPromo";
@@ -24,6 +25,7 @@ export default function Home() {
         <FAQSection />
         <SponsorsMarquee />
         <FeedbackSection />
+        <CourseImagesSection />
         <Contact />
       </div>
     </>

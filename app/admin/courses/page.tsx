@@ -136,7 +136,7 @@ export default function AdminCoursesPage() {
           <Link href="/admin/categories/new">
             <Button className="bg-[var(--brand-primary)] text-white hover:bg-[#236d90]">
               <Plus className="mr-2 h-4 w-4" />
-              إضافة فئة
+              إضافة مادة 
             </Button>
           </Link>
           <Link href="/admin/courses/new">
