@@ -8,6 +8,10 @@ export function normalizeCourseImageAspect(value?: string | null): CourseImageAs
   return value === "4:5" ? "4:5" : DEFAULT_COURSE_IMAGE_ASPECT;
 }
 
+export function getCourseImageAspectRatio(value?: string | null): string {
+  return normalizeCourseImageAspect(value) === "4:5" ? "4 / 5" : "16 / 9";
+}
+
 export function getCourseImageAspectClass(value?: string | null): string {
   return normalizeCourseImageAspect(value) === "4:5" ? "aspect-[4/5]" : "aspect-[16/9]";
 }

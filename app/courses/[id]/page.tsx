@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { arDZ } from 'date-fns/locale';
 import { toast } from 'sonner';
 import ImageGallery from '@/components/CourseImagesSlider';
-import { getCourseImageAspectClass } from '@/lib/course-image';
+import { getCourseImageAspectRatio } from '@/lib/course-image';
 
 type Course = {
   id: string;
@@ -162,7 +162,10 @@ export default function CoursePage() {
         <div className="grid gap-10 lg:grid-cols-5">
           <div className="space-y-8 lg:col-span-3">
             <div className="overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-[rgba(45,131,173,0.08)]">
-              <div className={`relative w-full bg-[var(--brand-primary-soft)] ${getCourseImageAspectClass(course.imageAspect)}`}>
+              <div
+                className="relative w-full bg-[var(--brand-primary-soft)]"
+                style={{ aspectRatio: getCourseImageAspectRatio(course.imageAspect) }}
+              >
                 <Image
                   src={course.image || '/images/logo.png'}
                   alt={course.title}

@@ -13,7 +13,7 @@ import { FiUser, FiMail, FiPhone, FiMapPin, FiDollarSign, FiClock, FiUpload, FiX
 import {
   COURSE_IMAGE_ASPECTS,
   DEFAULT_COURSE_IMAGE_ASPECT,
-  getCourseImageAspectClass,
+  getCourseImageAspectRatio,
   normalizeCourseImageAspect,
 } from '@/lib/course-image';
 
@@ -324,7 +324,10 @@ export default function CourseForm() {
               {imagePreview ? (
                 <div className="relative group">
                   <div className="max-w-full overflow-hidden rounded-xl border border-gray-200">
-                    <div className={`relative w-full bg-[var(--brand-surface)] ${getCourseImageAspectClass(selectedImageAspect)}`}>
+                    <div
+                      className="relative w-full bg-[var(--brand-surface)]"
+                      style={{ aspectRatio: getCourseImageAspectRatio(selectedImageAspect) }}
+                    >
                       <Image
                         src={imagePreview}
                         alt="Course preview"

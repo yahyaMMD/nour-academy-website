@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import { Container } from './Container';
 import { FadeIn } from './FadeIn';
-import { getCourseImageAspectClass } from '@/lib/course-image';
+import { getCourseImageAspectRatio } from '@/lib/course-image';
 
 type Course = {
   id: string;
@@ -131,9 +131,12 @@ const CoursesSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55 }}
                   viewport={{ once: true }}
-                  className="grid overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-[rgba(45,131,173,0.08)] lg:grid-cols-[1fr_1.05fr]"
+                  className="grid items-start overflow-hidden rounded-[2rem] bg-white shadow-xl ring-1 ring-[rgba(45,131,173,0.08)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]"
                 >
-                  <div className={`relative w-full bg-[var(--brand-primary-soft)] ${getCourseImageAspectClass(course.imageAspect)}`}>
+                  <div
+                    className="relative w-full self-start bg-[var(--brand-primary-soft)]"
+                    style={{ aspectRatio: getCourseImageAspectRatio(course.imageAspect) }}
+                  >
                     <Image
                       src={course.image || fallbackImage}
                       alt={course.title}
@@ -195,7 +198,10 @@ const CoursesSection = () => {
               >
                 <Link href={`/courses/${course.id}`} className="group block h-full">
                   <article className="flex h-full flex-col overflow-hidden rounded-[2rem] bg-white shadow-lg ring-1 ring-[rgba(45,131,173,0.08)] transition hover:-translate-y-1 hover:shadow-xl">
-                    <div className={`relative w-full overflow-hidden bg-[var(--brand-primary-soft)] ${getCourseImageAspectClass(course.imageAspect)}`}>
+                    <div
+                      className="relative w-full overflow-hidden bg-[var(--brand-primary-soft)]"
+                      style={{ aspectRatio: getCourseImageAspectRatio(course.imageAspect) }}
+                    >
                       <Image
                         src={course.image || fallbackImage}
                         alt={course.title}
