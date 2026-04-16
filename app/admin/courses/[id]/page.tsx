@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { FiUser, FiMail, FiPhone, FiMapPin, FiDollarSign, FiClock, FiUpload, FiX } from 'react-icons/fi';
+import { FiUser, FiMail, FiPhone, FiDollarSign, FiClock, FiUpload, FiX } from 'react-icons/fi';
 import {
   COURSE_IMAGE_ASPECTS,
   DEFAULT_COURSE_IMAGE_ASPECT,
@@ -34,7 +34,6 @@ const formSchema = z.object({
   instructor: z.string().min(2, 'اسم الأستاذ يجب أن يكون حرفين على الأقل'),
   date: z.date(),
   time: z.string().regex(/^\d{2}:\d{2}$/, 'يرجى إدخال وقت صحيح (HH:MM)'),
-  location: z.string().min(2, 'المكان يجب أن يكون حرفين على الأقل'),
   price: z.number().min(0, 'السعر يجب أن يكون موجبا'),
   phone: z.string().min(6, 'رقم الهاتف يجب أن يكون 6 أحرف على الأقل'),
   email: z.string().email('يرجى إدخال بريد إلكتروني صحيح'),
@@ -70,7 +69,6 @@ export default function CourseForm() {
       instructor: '',
       date: new Date(),
       time: '10:00',
-      location: '',
       price: 0,
       phone: '',
       email: '',
@@ -554,28 +552,6 @@ export default function CourseForm() {
                 {form.formState.errors.time && (
                   <p className="mt-2 text-sm text-red-500">
                     {form.formState.errors.time.message}
-                  </p>
-                )}
-              </div>
-
-              {/* المكان */}
-              <div>
-                <label className="block text-lg font-medium text-[var(--brand-ink)] mb-3">
-                  المكان *
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FiMapPin className="text-gray-400" />
-                  </div>
-                  <input
-                    placeholder="مكان الدورة"
-                    className="w-full pl-10 px-5 py-4 text-lg border border-gray-300 rounded-xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent"
-                    {...form.register('location')}
-                  />
-                </div>
-                {form.formState.errors.location && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {form.formState.errors.location.message}
                   </p>
                 )}
               </div>
