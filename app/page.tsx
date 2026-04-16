@@ -25,7 +25,7 @@ export default function Home() {
         <FAQSection />
         <SponsorsMarquee />
         <FeedbackSection />
-        <CourseImagesSection />
+        {/* <CourseImagesSection /> */}
         <Contact />
       </div>
     </>
